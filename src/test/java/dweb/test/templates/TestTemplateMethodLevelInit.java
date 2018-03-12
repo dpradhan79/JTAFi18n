@@ -2,8 +2,10 @@ package dweb.test.templates;
 
 import java.lang.reflect.Method;
 import java.net.URISyntaxException;
+import java.util.Locale;
 
 import org.apache.log4j.Logger;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
@@ -14,12 +16,17 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.xml.XmlTest;
 
+import com.config.IConstants;
 import com.factories.WebDriverFactory;
 import com.testreport.ExtentReporter;
 import com.testreport.ExtentReporter.ExtentTestVisibilityMode;
 import com.testreport.ReportFactory;
 import com.testreport.ReportFactory.ReportType;
 import com.utilities.ReusableLibs;
+
+import dweb.aut.i18n.vaseline.interfaces.IVaselineUserOperations;
+import dweb.aut.i18n.vaseline.operations.VaselineCanadaOperations;
+import dweb.aut.i18n.vaseline.operations.VaselineUSOperations;
 
 /**
  * Class with configuration for test execution
@@ -37,7 +44,7 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
  * @throws Exception
  */
 	@BeforeSuite
-	public void beforeSuite(ITestContext testContext, XmlTest xmlTest) throws Exception {
+	protected void beforeSuite(ITestContext testContext, XmlTest xmlTest) throws Exception {
 
 		LOG.info(String.format("Suite To Be Executed Next -  %s", testContext.getSuite().getName()));		
 		TestTemplate.implicitWaitInSecs = ReusableLibs.getConfigProperty("ImplicitWaitInSecs");
@@ -53,7 +60,7 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 	 * @param testContext
 	 */
 	@BeforeTest
-	public void beforeTest(ITestContext testContext) {
+	protected void beforeTest(ITestContext testContext) {
 		LOG.info(String.format("Thread - %d, Executes Next Test - %s ", Thread.currentThread().getId(),
 				testContext.getCurrentXmlTest().getName()));
 		if (((ExtentReporter) TestTemplate.testReport)
@@ -69,9 +76,13 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 	 * @param testContext
 	 */
 	@AfterTest
-	public void afterTest(ITestContext testContext) {
+	protected void afterTest(ITestContext testContext) {
 		LOG.info(String.format("Test - %s , Completed", testContext.getCurrentXmlTest().getName()));
 		TestTemplate.testReport.updateTestCaseStatus();
+		if(threadLocalWebDriver.get() != null)
+		{
+			threadLocalWebDriver.get().quit();
+		}
 	}
 
 	/**
@@ -82,7 +93,7 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 	 * @throws URISyntaxException
 	 */
 	@BeforeMethod
-	public void beforeMethod(ITestContext testContext, Method m) throws URISyntaxException {
+	protected void beforeMethod(ITestContext testContext, Method m) throws URISyntaxException {
 		try {
 			LOG.info(String.format("Thread - %d , Executes Next Test Method - %s", Thread.currentThread().getId(),
 					m.getName()));
@@ -108,7 +119,14 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 			// chromedriver
 			String browser = this.getTestParameter(testContext, "Browser");
 			webDriver = WebDriverFactory.getWebDriver(browser);
-			webDriver.get(this.url);
+			try
+			{
+				webDriver.get(this.url);
+			}
+			catch(TimeoutException ex)
+			{
+				LOG.error(String.format("Browser Takes More Time To Load, Time Out Defined - %s", TestTemplate.pageLoadTimeOutInSecs));
+			}
 			threadLocalWebDriver.set(webDriver);	
 
 		} catch (Exception ex) {
@@ -131,7 +149,7 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 	 * @throws Exception
 	 */
 	@AfterMethod
-	public void afterMethod(ITestContext testContext, ITestResult testResult, Method m) throws Exception {
+	protected void afterMethod(ITestContext testContext, ITestResult testResult, Method m) throws Exception {
 		LOG.info(String.format("Thread - %d , Completes Executing Test Method - %s", Thread.currentThread().getId(),
 				m.getName()));
 		TestTemplate.testReport.logInfo(String.format("Thread - %d , Completes Executing Test Method - %s",
@@ -154,6 +172,39 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 		finally {
 			TestTemplate.testReport.updateTestCaseStatus();
 		}
+	}
+	
+	protected IVaselineUserOperations getVaselineLocalizedOperations(String localeLanguageCode, String localeCountryCode)
+	{
+		IVaselineUserOperations countryVaseline = null;
+		Locale locale = new Locale(localeLanguageCode, localeCountryCode);
+		if(locale.equals(new Locale("en", "us")))
+		{
+			countryVaseline = new VaselineUSOperations(threadLocalWebDriver.get(), TestTemplate.testReport, locale, IConstants.PAGE_ELEMENTS_BASEFILENAME);
+		}
+		else if(locale.equals(new Locale("en", "ca")))
+		{
+			countryVaseline = new VaselineUSOperations(threadLocalWebDriver.get(), TestTemplate.testReport, locale, IConstants.PAGE_ELEMENTS_BASEFILENAME);
+		}
+		
+		return countryVaseline;
+	}
+	
+	protected IVaselineUserOperations getVaselineLocalizedOperations(String localeCountryCode)
+	{
+		IVaselineUserOperations countryVaseline = null;
+		String defaultLanguage = "en";
+		Locale locale = new Locale(defaultLanguage, localeCountryCode);
+		if(locale.equals(new Locale(defaultLanguage, "us")))
+		{
+			countryVaseline = new VaselineUSOperations(threadLocalWebDriver.get(), TestTemplate.testReport, locale, IConstants.PAGE_ELEMENTS_BASEFILENAME);
+		}
+		else if(locale.equals(new Locale(defaultLanguage, "ca")))
+		{
+			countryVaseline = new VaselineCanadaOperations(threadLocalWebDriver.get(), TestTemplate.testReport, locale, IConstants.PAGE_ELEMENTS_BASEFILENAME);
+		}
+		
+		return countryVaseline;
 	}
 
 }

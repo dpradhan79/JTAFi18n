@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite" parallel="tests" thread-count="5">
   <test name="TestBreyers1">
-  <parameter name="language" value="us"></parameter>
+  <parameter name="language" value="en"></parameter>
     <classes>
       <class name="dweb.test.i18n.breyers.functionaltests.TestContactUs"/>
     </classes>

@@ -51,7 +51,7 @@ public abstract class TestTemplate {
 	 * @throws URISyntaxException
 	 */
 	@DataProvider(name = "getDataFromExcel", parallel = true)
-	public Object[][] getDataFromExcel() throws URISyntaxException {
+	protected Object[][] getDataFromExcel() throws URISyntaxException {
 		URL urlFilePath = Resources.getResource("testdata/WebAutomationTestData.xlsx");
 		String filePath = Paths.get(urlFilePath.toURI()).toFile().getAbsolutePath();
 		Xls_Reader xlsReader = new Xls_Reader(filePath);

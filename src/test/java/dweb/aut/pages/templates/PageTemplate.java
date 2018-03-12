@@ -41,7 +41,7 @@ public abstract class PageTemplate {
 		
 	}	
 	
-	protected void SendKeys(By byLocator, String text)
+	protected void sendKeys(By byLocator, String text)
 	{
 		try
 		{
@@ -61,7 +61,28 @@ public abstract class PageTemplate {
 		
 	}
 	
-	protected void Click(By byLocator)
+	protected void moveToElement(By byLocator)
+	{
+		try
+		{
+			this.waitUntilElementIsClickable(byLocator);
+			Actions action = new Actions(this.wd);
+			action.moveToElement(this.wd.findElement(byLocator)).build().perform();			
+			LOG.info(String.format("moveToElement Successful - (By - %s)", byLocator));
+			this.testReport.logSuccess("moveToElement", String.format("moveToElement Performed On Locator - <mark>%s</mark>", byLocator));
+			
+		}
+		catch(Exception ex)
+		{
+			LOG.error(String.format("Exception Encountered - %s", ex.getMessage()));
+			this.testReport.logFailure("moveToElement", String.format("Failed To Perform moveToElement On Locator - <mark>%s</mark>", byLocator), this.getScreenShotName());
+			this.testReport.logException(ex);
+						
+		}
+		
+	}
+	
+	protected void click(By byLocator)
 	{
 		try
 		{
@@ -188,6 +209,27 @@ public abstract class PageTemplate {
 		{
 			LOG.error(String.format("Exception Encountered - %s", ex.getMessage()));
 			this.testReport.logFailure(String.format("getAttribute For Element - %s, For Attribute - %s", byLocator, attribute), String.format("Exception Encountered - %s, StackTrace - %s", ex.getMessage(), ex.getStackTrace()), this.getScreenShotName());
+									
+		}
+		return attributeValue;
+		
+	}
+	
+	protected String getText(By byLocator)
+	{
+		String attributeValue = null;
+		try
+		{
+			this.waitUntilElementIsClickable(byLocator);
+			attributeValue = this.wd.findElement(byLocator).getText();
+			LOG.info(String.format("Method - %s returns text - %s for Locator - %s", "getText", attributeValue, byLocator));
+			this.testReport.logInfo(String.format("Method - <mark>%s</mark> returns value - <mark>%s</mark> for Locator - <mark>%s</mark>", "text", attributeValue, byLocator));
+			
+		}
+		catch(Exception ex)
+		{
+			LOG.error(String.format("Exception Encountered - %s", ex.getMessage()));
+			this.testReport.logFailure(String.format("getText For Element - %s", byLocator), String.format("Exception Encountered - %s, StackTrace - %s", ex.getMessage(), ex.getStackTrace()), this.getScreenShotName());
 									
 		}
 		return attributeValue;
