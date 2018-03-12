@@ -1,4 +1,4 @@
-package aut.pages.templates;
+package dweb.aut.pages.templates;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -26,13 +26,13 @@ import com.utilities.ReusableLibs;
  * @author E001518  - Debasish Pradhan (Architect)
  *
  */
-public abstract class PageTemplateDWeb {
-	private static final Logger LOG = Logger.getLogger(PageTemplateDWeb.class);
+public abstract class PageTemplate {
+	private static final Logger LOG = Logger.getLogger(PageTemplate.class);
 	protected WebDriver wd = null;
 	protected IReporter testReport =  null;	
 	protected int implicitWaitInSecs = 0;
 	protected int pageLoadTimeOutInSecs = 0;	
-	protected PageTemplateDWeb(WebDriver webDriver, IReporter testReport)
+	protected PageTemplate(WebDriver webDriver, IReporter testReport)
 	{
 		this.wd = webDriver;
 		this.testReport = testReport;		

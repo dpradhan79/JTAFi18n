@@ -1,4 +1,4 @@
-package aut.pages.templates;
+package dweb.aut.pages.templates;
 
 import java.util.Locale;
 
@@ -12,40 +12,46 @@ import com.utilities.ReusableLibs;
  * @author E001518 (Debasish Pradhan)
  *
  */
-public abstract class PageTemplateAUT extends PageTemplateDWeb {
+public abstract class PageTemplateI18NSupport extends PageTemplate {
 
 	protected Locale locale = null;
 	protected String languageFileBaseName = null;
 
 	/**
 	 * 2 argument constructor to set webdriver and testreport
+	 * 
 	 * @param webDriver
 	 * @param testReport
 	 */
-	protected PageTemplateAUT(WebDriver webDriver, IReporter testReport) {
+	protected PageTemplateI18NSupport(WebDriver webDriver, IReporter testReport) {
 		super(webDriver, testReport);
 	}
 
 	/**
 	 * 3 argument constructor to set webdriver, testreport and locale
+	 * 
 	 * @param webDriver
 	 * @param testReport
 	 * @param locale
 	 */
-	protected PageTemplateAUT(WebDriver webDriver, IReporter testReport, Locale locale) {
+	protected PageTemplateI18NSupport(WebDriver webDriver, IReporter testReport, Locale locale) {
 		super(webDriver, testReport);
 		this.locale = locale;
 
 	}
 
 	/**
-	 * 4 argument constructor to set webdriver, testreport, locale and language specific file with key pair values, but without locale information and file extension
+	 * 4 argument constructor to set webdriver, testreport, locale and language
+	 * specific file with key pair values, but without locale information and file
+	 * extension
+	 * 
 	 * @param webDriver
 	 * @param testReport
 	 * @param locale
 	 * @param languageFileBaseName
 	 */
-	protected PageTemplateAUT(WebDriver webDriver, IReporter testReport, Locale locale, String languageFileBaseName) {
+	protected PageTemplateI18NSupport(WebDriver webDriver, IReporter testReport, Locale locale,
+			String languageFileBaseName) {
 		super(webDriver, testReport);
 		this.locale = locale;
 		this.languageFileBaseName = languageFileBaseName;
@@ -53,6 +59,7 @@ public abstract class PageTemplateAUT extends PageTemplateDWeb {
 
 	/**
 	 * locale to be set in AUT page
+	 * 
 	 * @param locale
 	 */
 	public void setPageLocale(Locale locale) {
@@ -60,7 +67,9 @@ public abstract class PageTemplateAUT extends PageTemplateDWeb {
 	}
 
 	/**
-	 * language specific file with key pair values,but without locale and extension,  to be set in AUT page
+	 * language specific file with key pair values,but without locale and extension,
+	 * to be set in AUT page
+	 * 
 	 * @param languageFileBaseName
 	 */
 	public void setPageLanguageSpecificFileBaseName(String languageFileBaseName) {
@@ -77,7 +86,8 @@ public abstract class PageTemplateAUT extends PageTemplateDWeb {
 
 	/**
 	 * 
-	 * @return AUT Page langauge specific file with key pair values, but without locale and extension
+	 * @return AUT Page langauge specific file with key pair values, but without
+	 *         locale and extension
 	 */
 	public String getPageLanguageSpecificFileBaseName() {
 		return this.languageFileBaseName;

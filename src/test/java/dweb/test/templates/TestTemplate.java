@@ -1,4 +1,4 @@
-package test.templates;
+package dweb.test.templates;
 
 import java.net.URISyntaxException;
 import java.net.URL;

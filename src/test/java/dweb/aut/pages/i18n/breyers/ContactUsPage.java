@@ -1,4 +1,4 @@
-package aut.pages.i18n.breyers;
+package dweb.aut.pages.i18n.breyers;
 
 import java.util.Locale;
 
@@ -10,9 +10,9 @@ import org.openqa.selenium.support.ui.Select;
 import com.testreport.IReporter;
 import com.utilities.ReusableLibs;
 
-import aut.pages.templates.PageTemplateAUT;
+import dweb.aut.pages.templates.PageTemplateI18NSupport;
 
-public class ContactUsPage extends PageTemplateAUT {
+public class ContactUsPage extends PageTemplateI18NSupport {
 
 	public ContactUsPage(WebDriver webDriver, IReporter testReport, Locale locale, String languageSpecificBaseFile) {
 		super(webDriver, testReport, locale);

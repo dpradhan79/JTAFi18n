@@ -4,13 +4,13 @@
   <test name="TestBreyers1">
   <parameter name="language" value="us"></parameter>
     <classes>
-      <class name="test.i18n.breyers.functionaltests.TestContactUs"/>
+      <class name="dweb.test.i18n.breyers.functionaltests.TestContactUs"/>
     </classes>
   </test>
   <test name="TestBreyers2">
   	<parameter name="language" value="es"></parameter>
     <classes>
-      <class name="test.i18n.breyers.functionaltests.TestContactUs"/>
+      <class name="dweb.test.i18n.breyers.functionaltests.TestContactUs"/>
     </classes>
   </test> <!-- TestBreyers -->
   

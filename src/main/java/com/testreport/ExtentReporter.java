@@ -26,7 +26,7 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.utils.FileUtil;
 import com.google.common.io.Resources;
 
-import test.templates.TestTemplateDWebMethodLevelInit;
+import dweb.test.templates.TestTemplateMethodLevelInit;
 
 /**
  * 
@@ -302,7 +302,7 @@ public class ExtentReporter implements IReporter {
         String format = screenShotPath.substring(screenShotPath.indexOf(".") + 1);       
        	ImageIO.write(screenFullImage, format, new File(screenShotPath));	*/	
 		
-		File screenShotFile = ((TakesScreenshot)TestTemplateDWebMethodLevelInit.threadLocalWebDriver.get()).getScreenshotAs(OutputType.FILE);
+		File screenShotFile = ((TakesScreenshot)TestTemplateMethodLevelInit.threadLocalWebDriver.get()).getScreenshotAs(OutputType.FILE);
 		FileUtils.copyFile(screenShotFile, new File(screenShotPath));
 	}
 	

@@ -1,4 +1,4 @@
-package test.templates;
+package dweb.test.templates;
 
 import java.lang.reflect.Method;
 import java.net.URISyntaxException;
@@ -26,9 +26,9 @@ import com.utilities.ReusableLibs;
  * @author E001518 - Debasish Pradhan (Architect)
  *
  */
-public abstract class TestTemplateDWebMethodLevelInit extends TestTemplate {
+public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 
-	private static final Logger LOG = Logger.getLogger(TestTemplateDWebMethodLevelInit.class);	
+	private static final Logger LOG = Logger.getLogger(TestTemplateMethodLevelInit.class);	
 
 /**
  * Configuration/Initialization before starting suite

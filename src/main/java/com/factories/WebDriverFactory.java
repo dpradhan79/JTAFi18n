@@ -15,7 +15,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import com.google.common.io.Resources;
 import com.utilities.ReusableLibs;
 
-import test.templates.TestTemplateDWebMethodLevelInit;
+import dweb.test.templates.TestTemplateMethodLevelInit;
 
 public class WebDriverFactory {
 		
