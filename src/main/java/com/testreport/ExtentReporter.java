@@ -12,6 +12,8 @@ import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 import java.nio.file.Paths;
 
+import javax.imageio.ImageIO;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.OutputType;
@@ -26,7 +28,11 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.utils.FileUtil;
 import com.google.common.io.Resources;
 
+import dweb.test.templates.TestTemplate;
 import dweb.test.templates.TestTemplateMethodLevelInit;
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.screentaker.ViewportPastingStrategy;
 
 /**
  * 
@@ -302,8 +308,14 @@ public class ExtentReporter implements IReporter {
         String format = screenShotPath.substring(screenShotPath.indexOf(".") + 1);       
        	ImageIO.write(screenFullImage, format, new File(screenShotPath));	*/	
 		
-		File screenShotFile = ((TakesScreenshot)TestTemplateMethodLevelInit.threadLocalWebDriver.get()).getScreenshotAs(OutputType.FILE);
+		//using selenium API
+		File screenShotFile = ((TakesScreenshot)TestTemplate.threadLocalWebDriver.get()).getScreenshotAs(OutputType.FILE);
 		FileUtils.copyFile(screenShotFile, new File(screenShotPath));
+		
+		//using third party library - AShot
+		/*Screenshot screenshot = new AShot().shootingStrategy(new ViewportPastingStrategy(1000)).takeScreenshot(TestTemplate.threadLocalWebDriver.get());
+		String format = screenShotPath.substring(screenShotPath.indexOf(".") + 1);     
+		ImageIO.write(screenshot.getImage(), format, new File(screenShotPath));*/
 	}
 	
 	

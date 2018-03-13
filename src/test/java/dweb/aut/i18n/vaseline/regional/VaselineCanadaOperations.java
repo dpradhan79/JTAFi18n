@@ -1,4 +1,4 @@
-package dweb.aut.i18n.vaseline.operations;
+package dweb.aut.i18n.vaseline.regional;
 
 import java.util.Locale;
 import java.util.Map;

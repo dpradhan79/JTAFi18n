@@ -1,12 +1,16 @@
 package dweb.test.i18n.vaseline.functionaltests;
 
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map;
+
 import org.testng.ITestContext;
 import org.testng.annotations.Test;
 
 import dweb.aut.i18n.vaseline.interfaces.IVaselineUserOperations;
 import dweb.test.templates.TestTemplateMethodLevelInit;
 
-public class TestHome extends TestTemplateMethodLevelInit{
+public class TestProducts extends TestTemplateMethodLevelInit{
 	
 	@Test	
 	public void validateNavigationAndMenus(ITestContext testContext) throws InterruptedException
@@ -60,8 +64,8 @@ public class TestHome extends TestTemplateMethodLevelInit{
 		vCountry.readReview(reviewItem, Float.parseFloat(expectedRating));
 	}
 	
-	@Test
-	public void writeReview(ITestContext testContext)
+	@Test(dataProvider = "getDataFromExcel")
+	public void writeReview(Hashtable<String, String> data, ITestContext testContext)
 	{
 		String localeCountryCode = this.getTestParameter(testContext, "localeCountry");		
 		String menuSelection = this.getTestParameter(testContext, "menuSelection");
@@ -76,7 +80,20 @@ public class TestHome extends TestTemplateMethodLevelInit{
 		//Select Product Item
 		vCountry.selectMenuProduct(menuItemSelection);
 		//write review
-		vCountry.writeReview(reviewItem, null);
+		Map<String, String> mapReviewInfo = new Hashtable<String, String>();
+		mapReviewInfo.put("OverallRating", data.get("OverallRating"));
+		mapReviewInfo.put("ReviewTitle", data.get("ReviewTitle"));
+		mapReviewInfo.put("Review", data.get("Review"));
+		mapReviewInfo.put("NickName", data.get("NickName"));
+		mapReviewInfo.put("ZipCode", data.get("ZipCode"));
+		mapReviewInfo.put("Email", data.get("Email"));
+		mapReviewInfo.put("BirthMonth", data.get("BirthMonth"));
+		mapReviewInfo.put("BirthYear", data.get("BirthYear"));		
+		mapReviewInfo.put("AgeRange", data.get("AgeRange"));
+		mapReviewInfo.put("Gender", data.get("Gender"));
+		mapReviewInfo.put("RecommendRating", data.get("RecommendRating"));
+		
+		vCountry.writeReview(reviewItem, mapReviewInfo);
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {

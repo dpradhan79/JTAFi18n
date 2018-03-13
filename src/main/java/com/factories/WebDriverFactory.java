@@ -11,6 +11,9 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.google.common.io.Resources;
 import com.utilities.ReusableLibs;
@@ -44,6 +47,26 @@ public class WebDriverFactory {
 
 			wd = new ChromeDriver(options);			
 			break;
+			
+		case "FF":
+		case "FIREFOX":
+			String ffDriverExe = ReusableLibs.getConfigProperty("FirefoxDriverExe");
+			urlFilePath = Resources
+					.getResource(String.format("%s%s%s", "drivers", File.separatorChar, ffDriverExe));
+			String ffdriverPath = Paths.get(urlFilePath.toURI()).toFile().getAbsolutePath();
+			System.setProperty("webdriver.gecko.driver", ffdriverPath);			
+			wd = new FirefoxDriver();
+			break;
+			
+		case "IE":			
+		case "INTERNETEXPLORER":
+			String ieDriverExe = ReusableLibs.getConfigProperty("IEDriverExe");
+			urlFilePath = Resources
+					.getResource(String.format("%s%s%s", "drivers", File.separatorChar, ieDriverExe));
+			String iedriverPath = Paths.get(urlFilePath.toURI()).toFile().getAbsolutePath();
+			System.setProperty("webdriver.ie.driver", iedriverPath);	
+			wd = new InternetExplorerDriver();
+			break;
 		}
 		wd.manage().timeouts().implicitlyWait(Integer.parseInt(ReusableLibs.getConfigProperty("ImplicitWaitInSecs")),
 				TimeUnit.SECONDS);
@@ -51,6 +74,7 @@ public class WebDriverFactory {
 				TimeUnit.SECONDS);
 		wd.manage().window().maximize();
 		return wd;
+						
 	}
 
 }

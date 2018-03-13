@@ -7,33 +7,29 @@
   <parameter name="reviewItem" value="Vaseline® Jelly Original" />
   
   <test name="TestWriteReview_CA">
+  <parameter name="Browser" value="chrome" />
+  <parameter name="TestData" value="WebAutomationTestData_ca.xlsx" />
   <parameter name="localeCountry" value="ca"></parameter>
   <parameter name="APPURL" value="http://www.vaseline.ca/en"></parameter>
   <parameter name = "Menus" value = "PRODUCTS,THE VASELINE® STORY,SKIN HEALTH,THE HEALING PROJECT,LIP TINS" />
   <parameter name="expectedRating" value="4.8" />
   <parameter name="overallRating" value="Good"></parameter>
   <classes>
-  <class name = "dweb.test.i18n.vaseline.functionaltests.TestHome">
-  <methods>
-  <include name="writeReview"></include>
-  </methods>
-  </class>
+  <class name = "dweb.test.i18n.vaseline.functionaltests.TestProducts" />  
   </classes>
   </test> <!-- Test -->
   
   <test name="TestWriteReview_US">
-  <parameter name="localeCountry" value="us"></parameter>
-  <parameter name="APPURL" value="http://www.vaseline.us/"></parameter>
+  <parameter name="Browser" value="chrome" />
+  <parameter name="TestData" value="WebAutomationTestData_us.xlsx" />
+  <parameter name="localeCountry" value="us" />
+  <parameter name="APPURL" value="http://www.vaseline.us/" />
   <parameter name = "Menus" value = "PRODUCTS,THE VASELINE® STORY,SKIN HEALTH,THE HEALING PROJECT,LIP TINS,WHAT" /> 
   <parameter name = "menuItems" value = "JELLY,INTENSIVE CARE™,LIP THERAPY®,MEN"/>
   <parameter name="expectedRating" value="4.81" />
   
   <classes>
-  <class name = "dweb.test.i18n.vaseline.functionaltests.TestHome">
-  <methods>
-  <include name="writeReview"></include>
-  </methods>
-  </class>
+  <class name = "dweb.test.i18n.vaseline.functionaltests.TestProducts" />  
   </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

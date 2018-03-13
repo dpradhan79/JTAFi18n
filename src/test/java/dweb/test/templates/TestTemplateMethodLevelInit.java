@@ -25,8 +25,8 @@ import com.testreport.ReportFactory.ReportType;
 import com.utilities.ReusableLibs;
 
 import dweb.aut.i18n.vaseline.interfaces.IVaselineUserOperations;
-import dweb.aut.i18n.vaseline.operations.VaselineCanadaOperations;
-import dweb.aut.i18n.vaseline.operations.VaselineUSOperations;
+import dweb.aut.i18n.vaseline.regional.VaselineCanadaOperations;
+import dweb.aut.i18n.vaseline.regional.VaselineUSOperations;
 
 /**
  * Class with configuration for test execution

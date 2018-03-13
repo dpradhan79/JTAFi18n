@@ -55,7 +55,7 @@ public abstract class TestTemplate {
 		URL urlFilePath = Resources.getResource("testdata/WebAutomationTestData.xlsx");
 		String filePath = Paths.get(urlFilePath.toURI()).toFile().getAbsolutePath();
 		Xls_Reader xlsReader = new Xls_Reader(filePath);
-		Object[][] objMetrics = TestUtil.getData("UserPermission", xlsReader, "UserPermissions");
+		Object[][] objMetrics = TestUtil.getData("WriteReview", xlsReader, "ProductItemReview");
 		return objMetrics;
 	}
 	
