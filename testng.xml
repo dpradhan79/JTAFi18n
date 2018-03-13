@@ -2,14 +2,14 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite" parallel="tests" thread-count="5">
   <parameter name="APPURL" value="https://secure.breyers.com/contactus" />
-  <test name="TestBreyers1">
+  <test name="TestBreyers_en_ie">
   <parameter name="language" value="en" />
-  <parameter name="Browser" value="chrome" />
+  <parameter name="Browser" value="ie" />
     <classes>
       <class name="dweb.test.i18n.breyers.functionaltests.TestContactUs"/>
     </classes>
   </test>
-  <test name="TestBreyers2">
+  <test name="TestBreyers_es_ff">
   	<parameter name="language" value="es" />
   	<parameter name="Browser" value="ff" />
     <classes>

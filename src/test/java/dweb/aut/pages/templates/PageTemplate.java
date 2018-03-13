@@ -177,8 +177,9 @@ public abstract class PageTemplate {
 	    	}
 	    	else
 	    	{
-	    	Actions act = new Actions(this.wd);
-	    	act.moveToElement(checkBox).click().build().perform();
+	    	/*Actions act = new Actions(this.wd);
+	    	act.moveToElement(checkBox).click().build().perform();*/
+	    	checkBox.click();
 	    	LOG.info("check-box checked successfully");
 	    	this.testReport.logSuccess("checkCheckBox", String.format("check-box - <mark>%s</mark> checked successfully", byLocator));
 	    	}
