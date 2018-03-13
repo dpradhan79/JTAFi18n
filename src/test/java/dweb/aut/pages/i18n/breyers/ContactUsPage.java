@@ -24,7 +24,22 @@ public class ContactUsPage extends PageTemplateI18NSupport {
 	public void selectInquiryType()
 	{
 		String inquiryType = this.getLocalizedValue("inquiryTypeItem");		
-		this.SelectDropDownByText(By.id("idInquiryType"), inquiryType);	
+		this.SelectDropDownByText(By.id("idInquiryType"), inquiryType);
+		
+	}
+	
+	public void fillDetails()
+	{
+		this.sendKeys(By.id("emailId"), this.getLocalizedValue("emailId"));
+		this.sendKeys(By.id("prefix"), this.getLocalizedValue("prefix"));
+		this.sendKeys(By.id("firstName"), this.getLocalizedValue("fName"));
+		this.sendKeys(By.id("lastName"), this.getLocalizedValue("lName"));
+		this.sendKeys(By.id("address1"), this.getLocalizedValue("address1"));
+		this.sendKeys(By.id("address2"), this.getLocalizedValue("address2"));
+		this.sendKeys(By.id("city"), this.getLocalizedValue("city"));
+		this.SelectDropDownByValue(By.id("state"), this.getLocalizedValue("state"));
+		
+		
 	}
 	
 	

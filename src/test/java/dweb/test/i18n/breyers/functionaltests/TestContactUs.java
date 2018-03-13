@@ -16,7 +16,8 @@ public class TestContactUs extends TestTemplateMethodLevelInit {
 		ContactUsPage contactPage = new ContactUsPage(TestTemplateMethodLevelInit.threadLocalWebDriver.get(),
 				TestTemplateMethodLevelInit.testReport, new Locale(language), "page_elements.DesktopWebUI");
 		contactPage.selectLanguage();
-		contactPage.selectInquiryType();		
+		contactPage.selectInquiryType();	
+		contactPage.fillDetails();
 		Thread.sleep(10000);
 
 	}

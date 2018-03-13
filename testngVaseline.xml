@@ -20,7 +20,7 @@
   </test> <!-- Test -->
   
   <test name="TestWriteReview_US">
-  <parameter name="Browser" value="firefox" />
+  <parameter name="Browser" value="chrome" />
   <parameter name="TestData" value="WebAutomationTestData_us.xlsx" />
   <parameter name="localeCountry" value="us" />
   <parameter name="APPURL" value="http://www.vaseline.us/" />
