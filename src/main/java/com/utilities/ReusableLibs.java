@@ -209,21 +209,26 @@ public class ReusableLibs
     
     public static String getLocalizedKeyValue(Locale locale, String sbaseName, String sKey)
     {
-    	ResourceBundle resourceBundle = ResourceBundle.getBundle(sbaseName, locale);
-    	String keyValue = resourceBundle.getString(sKey);
-    	if(keyValue == null)
+    	String keyValue = null;
+    	try
     	{
-    		Locale enLocale = new Locale("en");
-    		if(!locale.equals(enLocale))
-			{
-    			resourceBundle = ResourceBundle.getBundle(sbaseName, enLocale);
-    			keyValue = resourceBundle.getString(sKey);
-			}
+	    	ResourceBundle resourceBundle = ResourceBundle.getBundle(sbaseName, locale);
+	    	keyValue = resourceBundle.getString(sKey);
+	    	/*if(keyValue == null)
+	    	{
+	    		Locale enLocale = new Locale("en");
+	    		if(!locale.equals(enLocale))
+				{
+	    			resourceBundle = ResourceBundle.getBundle(sbaseName, enLocale);
+	    			keyValue = resourceBundle.getString(sKey);
+				}
+	    	}*/
     	}
+    	catch(Exception ex) {}    	
     	return keyValue;
     }
     
-    public static String getScreenshotFile(String screenshotFolder, String extension)
+    public synchronized static String getScreenshotFile(String screenshotFolder, String extension)
 	{
 		String fileName = null;
 		int count = 1;

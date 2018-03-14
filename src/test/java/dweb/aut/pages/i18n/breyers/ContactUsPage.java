@@ -13,13 +13,7 @@ public class ContactUsPage extends PageTemplateI18NSupport {
 
 	public ContactUsPage(WebDriver webDriver, IReporter testReport, Locale locale, String languageSpecificBaseFile) {
 		super(webDriver, testReport, locale, languageSpecificBaseFile);			
-	}
-	
-	public void selectLanguage()
-	{
-		String languageSelection = this.getLocalizedValue("languageSelection");		
-		this.SelectDropDownByText(By.id("language"), languageSelection);
-	}
+	}	
 	
 	public void selectInquiryType()
 	{

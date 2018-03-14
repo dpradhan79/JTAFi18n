@@ -94,6 +94,7 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 	 */
 	@BeforeMethod
 	protected void beforeMethod(ITestContext testContext, Method m) throws URISyntaxException {
+		
 		try {
 			LOG.info(String.format("Thread - %d , Executes Next Test Method - %s", Thread.currentThread().getId(),
 					m.getName()));
@@ -113,7 +114,7 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 			}
 
 			// Use APPURL if provided in Test Suite XML
-			this.url = this.getTestParameter(testContext, "APPURL");
+			String url = this.getTestParameter(testContext, "APPURL");
 
 			// Use browser specific wd as provided in Test Suite XML or else use
 			// chromedriver
@@ -121,7 +122,7 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 			webDriver = WebDriverFactory.getWebDriver(browser);
 			try
 			{
-				webDriver.get(this.url);
+				webDriver.get(url);
 			}
 			catch(TimeoutException ex)
 			{
@@ -134,8 +135,8 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 			TestTemplate.testReport.logException(ex);
 
 		} finally {
-			TestTemplate.testReport.logInfo(String.format("Thread - %d , Executes Next Test Method - %s",
-					Thread.currentThread().getId(), m.getName()));
+			TestTemplate.testReport.logInfo(String.format("Thread - %d , Executes Next Test Method - %s On Browser - %s",
+					Thread.currentThread().getId(), m.getName(), this.getTestParameter(testContext, "Browser")));
 		}
 
 	}
@@ -152,8 +153,8 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 	protected void afterMethod(ITestContext testContext, ITestResult testResult, Method m) throws Exception {
 		LOG.info(String.format("Thread - %d , Completes Executing Test Method - %s", Thread.currentThread().getId(),
 				m.getName()));
-		TestTemplate.testReport.logInfo(String.format("Thread - %d , Completes Executing Test Method - %s",
-				Thread.currentThread().getId(), m.getName()));
+		TestTemplate.testReport.logInfo(String.format("Thread - %d , Completes Executing Test Method - %s On Browser - %s",
+				Thread.currentThread().getId(), m.getName(), this.getTestParameter(testContext, "Browser")));
 		
 		try {
 			threadLocalWebDriver.get().close();

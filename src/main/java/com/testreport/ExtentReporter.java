@@ -285,10 +285,8 @@ public class ExtentReporter implements IReporter {
 		// TODO Auto-generated method stub
 		
 	}
-
-
 	
-	private void takeScreenShot(String screenShotPath) throws IOException, AWTException
+	private synchronized void takeScreenShot(String screenShotPath) throws IOException, AWTException
 	{
 		/*Robot objRobot = new Robot();		
 		Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());

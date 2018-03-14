@@ -26,7 +26,7 @@ public abstract class TestTemplate {
 	private static final Logger LOG = Logger.getLogger(TestTemplate.class);
 	protected static IReporter testReport = null;
 	protected String ChromeDriverExe = null;
-	protected String url = null;
+	//protected String url = null;
 	protected static String implicitWaitInSecs = null;
 	protected static String pageLoadTimeOutInSecs = null;
 	public static ThreadLocal<WebDriver> threadLocalWebDriver = new ThreadLocal<WebDriver>();	
