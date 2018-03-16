@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="SuiteTestBreyersContactUs" parallel="tests" thread-count="5" preserve-order="true">
+<suite name="SuiteTestBreyers" parallel="tests" thread-count="5" preserve-order="true">
   <parameter name="APPURL" value="https://secure.breyers.com/contactus" />
+  <!-- Test For English On IE -->
   <test name="TestBreyers_en_ie" preserve-order="true">
   <parameter name="language" value="en" />
   <parameter name="Browser" value="ie" />
@@ -9,6 +10,8 @@
       <class name="dweb.test.i18n.breyers.functionaltests.TestBreyers"/>
     </classes>
   </test>
+  
+   <!-- Test For Spanish On Firefox -->
   <test name="TestBreyers_es_ff" preserve-order="true">
   	<parameter name="language" value="es" />
   	<parameter name="Browser" value="ff" />

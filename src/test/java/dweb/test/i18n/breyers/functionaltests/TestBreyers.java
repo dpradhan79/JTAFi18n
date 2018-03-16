@@ -12,7 +12,7 @@ import dweb.aut.pages.i18n.breyers.HomePage;
 import dweb.test.templates.TestTemplateMethodLevelInit;
 
 public class TestBreyers extends TestTemplateMethodLevelInit {
-
+	
 	@Test(priority=1)
 	public void testMenus(ITestContext testContext) {
 		HomePage homePage = new HomePage(TestTemplateMethodLevelInit.threadLocalWebDriver.get(),
@@ -34,8 +34,7 @@ public class TestBreyers extends TestTemplateMethodLevelInit {
 				IConstants.PAGE_ELEMENTS_BASEFILENAME);
 		homePage.selectLanguage();
 		contactPage.selectInquiryType();
-		contactPage.fillDetails();
-		Thread.sleep(10000);
+		contactPage.fillDetails();		
 
 	}
 

@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -53,6 +54,13 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 
 		TestTemplate.testReport = ReportFactory.getInstance(ReportType.ExtentHtml,
 				ExtentTestVisibilityMode.valueOf(extentTestVisibilityMode));
+	}
+	
+	@AfterSuite
+	protected void afterSuite(ITestContext testContext)
+	{
+		LOG.info(String.format("Suite - %s , Completed", testContext.getSuite().getName()));
+		TestTemplate.testReport.updateTestCaseStatus();		
 	}
 	
 	/**

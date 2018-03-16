@@ -1,0 +1,1750 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<head>
+	<meta charset='UTF-8' /> 
+	<meta name='description' content='' />
+	<meta name='robots' content='noodp, noydir' />
+	<meta name='viewport' content='width=device-width, initial-scale=1' />
+	<meta id="timeStampFormat" name="timeStampFormat" content='MMM d, yyyy hh:mm:ss a'/>
+	
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+		<link href='https://cdn.rawgit.com/anshooarora/extentreports-java/b4a58fcfd1e137bd9287244035a7c80d3d73b3af/dist/css/extent.css' type='text/css' rel='stylesheet' />
+	
+	<title>JTAF Test Report</title>
+
+	<style type='text/css'>
+			
+            
+                
+            
+        
+	</style>
+</head>
+
+	<body class='extent dark default hide-overflow '>
+		<div id='theme-selector' alt='Click to toggle theme. To enable by default, use theme configuration.' title='Click to toggle theme. To enable by default, use theme configuration.'>
+			<span><i class='material-icons'>desktop_windows</i></span>
+		</div>
+
+<nav>
+	<div class="nav-wrapper">
+		<a href="#!" class="brand-logo blue darken-3">Extent</a>
+
+		<!-- slideout menu -->
+		<ul id='slide-out' class='side-nav fixed hide-on-med-and-down'>
+			<li class='waves-effect active'><a href='#!' view='test-view' onclick="configureView(0);chartsView('test');"><i class='material-icons'>dashboard</i></a></li>
+						<li class='waves-effect'><a href='#!' onclick="configureView(-1);chartsView('dashboard');" view='dashboard-view'><i class='material-icons'>track_changes</i></i></a></li>
+		</ul>
+
+		<!-- report name -->
+		<span class='report-name'>Automation Report</span>
+		
+		<!-- report headline -->
+		<span class='report-headline'></span>
+
+		<!-- nav-right -->
+		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
+			<li>
+                <a href='#!'>
+                    <span class='label suite-start-time blue darken-3'>Mar 15, 2018 02:15:46 PM</span>
+				</a>
+			</li>
+			<li>
+                <a href='#!'>
+                    <span class='label blue darken-3'>3.1.3</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+		<!-- container -->
+		<div class='container'>
+
+<div id='test-view' class='view'>
+				
+	<section id='controls'>
+		<div class='controls grey lighten-4'>
+			<!-- test toggle -->
+			<div class='chip transparent'>
+				<a class='dropdown-button tests-toggle' data-activates='tests-toggle' data-constrainwidth='true' data-beloworigin='true' data-hover='true' href='#'>
+					<i class='material-icons'>warning</i> Status
+				</a>
+				<ul id='tests-toggle' class='dropdown-content'>
+											<li status='pass'><a href='#!'>Pass <i class='material-icons green-text'>check_circle</i></a></li>
+						<li status='fail'><a href='#!'>Fail <i class='material-icons red-text'>cancel</i></a></li>
+					<li class='divider'></li>
+					<li status='clear' clear='true'><a href='#!'>Clear Filters <i class='material-icons'>clear</i></a></li>
+				</ul>
+			</div>
+			<!-- test toggle -->
+
+			<!-- category toggle -->
+			<!-- category toggle -->
+
+			<!-- clear filters -->
+			<div class='chip transparent hide'>
+				<a class='' id='clear-filters' alt='Clear Filters' title='Clear Filters'>
+					<i class='material-icons'>close</i> Clear
+				</a>
+			</div>
+			<!-- clear filters -->
+
+			<!-- enable dashboard -->
+			<div id='toggle-test-view-charts' class='chip transparent'>
+				<a class='pink-text' id='enable-dashboard' alt='Enable Dashboard' title='Enable Dashboard'>
+					<i class='material-icons'>track_changes</i> Dashboard
+				</a>
+			</div>
+			<!-- enable dashboard -->
+
+			<!-- search -->
+			<div class='chip transparent' alt='Search Tests' title='Search Tests'>
+				<a href="#" class='search-div'>
+					<i class='material-icons'>search</i> Search
+				</a>
+
+				<div class='input-field left hide'>
+					<input id='search-tests' type='text' class='validate browser-default' placeholder='Search Tests...'>
+				</div>
+				
+			</div>
+			<!-- search -->
+		</div>
+	</section>
+
+
+<div id='test-view-charts' class='subview-full'>
+	<div id='charts-row' class='row nm-v nm-h'>
+		<div class='col s12 m6 l6 np-h'>
+			<div class='card-panel nm-v'>
+				<div class='left panel-name'>Tests</div>
+				<div class='chart-box'>
+					<canvas id='parent-analysis' width='100' height='80'></canvas>
+				</div>
+				<div class='block text-small'>
+					<span class='tooltipped' data-position='top' data-tooltip='90%'><span class='strong'>9</span> test(s) passed</span>
+				</div>
+				<div class='block text-small'>
+					<span class='strong tooltipped' data-position='top' data-tooltip='10%'>1</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+				</div>
+			</div>
+		</div>
+		
+		<div class='col s12 m6 l6 np-h'>
+			<div class='card-panel nm-v'>
+				<div class='left panel-name'>Steps</div>
+				<div class='chart-box'>
+					<canvas id='child-analysis' width='100' height='80'></canvas>
+				</div>
+				<div class='block text-small'>
+					<span class='tooltipped' data-position='top' data-tooltip='83.19%'><span class='strong'>193</span> step(s) passed</span>
+				</div>
+				<div class='block text-small'>
+					<span class='strong tooltipped' data-position='top' data-tooltip='0.431%'>1</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='16.379%'>38</span> others
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+	<div class='subview-left left'>
+		
+		<div class='view-summary'>
+			<h5>Tests</h5>
+			<ul id='test-collection' class='test-collection'>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='1'>
+					<div class='test-heading'>
+						<span class='test-name'>TestBreyers_es_ff-testMenus</span>
+						<span class='test-time'>Mar 15, 2018 02:15:47 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Mar 15, 2018 02:15:47 PM</span>
+	<span class='label end-time'>Mar 15, 2018 02:17:49 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 2m 2s+694ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:16:20 PM</td>
+					<td class='step-details'>Thread - 14 , Executes Next Test Method - testMenus On Browser - ff</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:16:34 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.id: language)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:16:42 PM</td>
+					<td class='step-details'>StepName - SelectDropDownByText, StepDescription - Selected Visible Text - <mark>Español</mark> On Locator - <mark>By.id: language</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:16:42 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[starts-with(text(), 'SOBRE NOSOTROS')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:16:51 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //a[starts-with(text(), 'SOBRE NOSOTROS')]</mark></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:16:52 PM</td>
+					<td class='step-details'>Appllication Screen After Clicking Menu - SOBRE NOSOTROS<img data-featherlight='ErrorScreenshots\Screenshot_14_1.jpg' width='10%' src='ErrorScreenshots\Screenshot_14_1.jpg' data-src='ErrorScreenshots\Screenshot_14_1.jpg'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:16:52 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[starts-with(text(), 'NUESTRO COMPROMISO')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:16:58 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //a[starts-with(text(), 'NUESTRO COMPROMISO')]</mark></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:16:59 PM</td>
+					<td class='step-details'>Appllication Screen After Clicking Menu - NUESTRO COMPROMISO<img data-featherlight='ErrorScreenshots\Screenshot_14_2.jpg' width='10%' src='ErrorScreenshots\Screenshot_14_2.jpg' data-src='ErrorScreenshots\Screenshot_14_2.jpg'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:16:59 PM</td>
+					<td class='step-details'>FOR LANGUAGE - es, MENU WAS NOT PRESENT For KEY - menu_2in1</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:16:59 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[starts-with(text(), 'DELIGHTS')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:04 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //a[starts-with(text(), 'DELIGHTS')]</mark></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:17:04 PM</td>
+					<td class='step-details'>Appllication Screen After Clicking Menu - DELIGHTS<img data-featherlight='ErrorScreenshots\Screenshot_14_3.jpg' width='10%' src='ErrorScreenshots\Screenshot_14_3.jpg' data-src='ErrorScreenshots\Screenshot_14_3.jpg'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:04 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[starts-with(text(), 'GELATO')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:09 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //a[starts-with(text(), 'GELATO')]</mark></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:17:09 PM</td>
+					<td class='step-details'>Appllication Screen After Clicking Menu - GELATO<img data-featherlight='ErrorScreenshots\Screenshot_14_4.jpg' width='10%' src='ErrorScreenshots\Screenshot_14_4.jpg' data-src='ErrorScreenshots\Screenshot_14_4.jpg'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:09 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[starts-with(text(), 'NUESTRAS VAINILLAS')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:17 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //a[starts-with(text(), 'NUESTRAS VAINILLAS')]</mark></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:17:18 PM</td>
+					<td class='step-details'>Appllication Screen After Clicking Menu - NUESTRAS VAINILLAS<img data-featherlight='ErrorScreenshots\Screenshot_14_5.jpg' width='10%' src='ErrorScreenshots\Screenshot_14_5.jpg' data-src='ErrorScreenshots\Screenshot_14_5.jpg'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:18 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[starts-with(text(), 'PRODUCTOS')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:29 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //a[starts-with(text(), 'PRODUCTOS')]</mark></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:17:29 PM</td>
+					<td class='step-details'>Appllication Screen After Clicking Menu - PRODUCTOS<img data-featherlight='ErrorScreenshots\Screenshot_14_6.jpg' width='10%' src='ErrorScreenshots\Screenshot_14_6.jpg' data-src='ErrorScreenshots\Screenshot_14_6.jpg'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:29 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[starts-with(text(), 'RECETAS')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:49 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //a[starts-with(text(), 'RECETAS')]</mark></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:17:49 PM</td>
+					<td class='step-details'>Appllication Screen After Clicking Menu - RECETAS<img data-featherlight='ErrorScreenshots\Screenshot_14_7.jpg' width='10%' src='ErrorScreenshots\Screenshot_14_7.jpg' data-src='ErrorScreenshots\Screenshot_14_7.jpg'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:17:49 PM</td>
+					<td class='step-details'>Thread - 14 , Completes Executing Test Method - testMenus On Browser - ff</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='2'>
+					<div class='test-heading'>
+						<span class='test-name'>TestBreyers_en_ie-testMenus</span>
+						<span class='test-time'>Mar 15, 2018 02:15:47 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Mar 15, 2018 02:15:47 PM</span>
+	<span class='label end-time'>Mar 15, 2018 02:17:32 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 45s+53ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:16:00 PM</td>
+					<td class='step-details'>Thread - 13 , Executes Next Test Method - testMenus On Browser - ie</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:16:12 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.id: language)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:16:13 PM</td>
+					<td class='step-details'>StepName - SelectDropDownByText, StepDescription - Selected Visible Text - <mark>English</mark> On Locator - <mark>By.id: language</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:16:13 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[starts-with(text(), 'ABOUT US')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:16:21 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //a[starts-with(text(), 'ABOUT US')]</mark></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:16:21 PM</td>
+					<td class='step-details'>Appllication Screen After Clicking Menu - ABOUT US<img data-featherlight='ErrorScreenshots\Screenshot_13_1.jpg' width='10%' src='ErrorScreenshots\Screenshot_13_1.jpg' data-src='ErrorScreenshots\Screenshot_13_1.jpg'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:16:22 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[starts-with(text(), 'PLEDGE')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:16:32 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //a[starts-with(text(), 'PLEDGE')]</mark></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:16:32 PM</td>
+					<td class='step-details'>Appllication Screen After Clicking Menu - PLEDGE<img data-featherlight='ErrorScreenshots\Screenshot_13_2.jpg' width='10%' src='ErrorScreenshots\Screenshot_13_2.jpg' data-src='ErrorScreenshots\Screenshot_13_2.jpg'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:16:33 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[starts-with(text(), '2in1')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:16:41 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //a[starts-with(text(), '2in1')]</mark></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:16:42 PM</td>
+					<td class='step-details'>Appllication Screen After Clicking Menu - 2in1<img data-featherlight='ErrorScreenshots\Screenshot_13_3.jpg' width='10%' src='ErrorScreenshots\Screenshot_13_3.jpg' data-src='ErrorScreenshots\Screenshot_13_3.jpg'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:16:42 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[starts-with(text(), 'DELIGHTS')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:16:46 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //a[starts-with(text(), 'DELIGHTS')]</mark></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:16:47 PM</td>
+					<td class='step-details'>Appllication Screen After Clicking Menu - DELIGHTS<img data-featherlight='ErrorScreenshots\Screenshot_13_4.jpg' width='10%' src='ErrorScreenshots\Screenshot_13_4.jpg' data-src='ErrorScreenshots\Screenshot_13_4.jpg'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:16:49 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[starts-with(text(), 'GELATO')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:16:58 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //a[starts-with(text(), 'GELATO')]</mark></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:16:58 PM</td>
+					<td class='step-details'>Appllication Screen After Clicking Menu - GELATO<img data-featherlight='ErrorScreenshots\Screenshot_13_5.jpg' width='10%' src='ErrorScreenshots\Screenshot_13_5.jpg' data-src='ErrorScreenshots\Screenshot_13_5.jpg'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:16:59 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[starts-with(text(), 'VANILLAS')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:11 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //a[starts-with(text(), 'VANILLAS')]</mark></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:17:11 PM</td>
+					<td class='step-details'>Appllication Screen After Clicking Menu - VANILLAS<img data-featherlight='ErrorScreenshots\Screenshot_13_6.jpg' width='10%' src='ErrorScreenshots\Screenshot_13_6.jpg' data-src='ErrorScreenshots\Screenshot_13_6.jpg'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:13 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[starts-with(text(), 'PRODUCTS')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:23 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //a[starts-with(text(), 'PRODUCTS')]</mark></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:17:24 PM</td>
+					<td class='step-details'>Appllication Screen After Clicking Menu - PRODUCTS<img data-featherlight='ErrorScreenshots\Screenshot_13_7.jpg' width='10%' src='ErrorScreenshots\Screenshot_13_7.jpg' data-src='ErrorScreenshots\Screenshot_13_7.jpg'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:24 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[starts-with(text(), 'RECIPES')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:31 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //a[starts-with(text(), 'RECIPES')]</mark></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:17:32 PM</td>
+					<td class='step-details'>Appllication Screen After Clicking Menu - RECIPES<img data-featherlight='ErrorScreenshots\Screenshot_13_8.jpg' width='10%' src='ErrorScreenshots\Screenshot_13_8.jpg' data-src='ErrorScreenshots\Screenshot_13_8.jpg'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:17:32 PM</td>
+					<td class='step-details'>Thread - 13 , Completes Executing Test Method - testMenus On Browser - ie</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='3'>
+					<div class='test-heading'>
+						<span class='test-name'>TestBreyers_en_ie-testContactUs</span>
+						<span class='test-time'>Mar 15, 2018 02:17:33 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Mar 15, 2018 02:17:33 PM</span>
+	<span class='label end-time'>Mar 15, 2018 02:18:07 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 33s+510ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:17:45 PM</td>
+					<td class='step-details'>Thread - 13 , Executes Next Test Method - testContactUs On Browser - ie</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:46 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.id: language)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:46 PM</td>
+					<td class='step-details'>StepName - SelectDropDownByText, StepDescription - Selected Visible Text - <mark>English</mark> On Locator - <mark>By.id: language</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:46 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.id: idInquiryType)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:47 PM</td>
+					<td class='step-details'>StepName - SelectDropDownByText, StepDescription - Selected Visible Text - <mark>Product Concern</mark> On Locator - <mark>By.id: idInquiryType</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:47 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.id: emailId)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:48 PM</td>
+					<td class='step-details'>StepName - SendKeys, StepDescription - Entered Text - <mark>debasish.pradhan@cignit.com</mark> To Locator - <mark>By.id: emailId</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:48 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.id: prefix)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:49 PM</td>
+					<td class='step-details'>StepName - SendKeys, StepDescription - Entered Text - <mark>Mr</mark> To Locator - <mark>By.id: prefix</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:49 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.id: firstName)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:50 PM</td>
+					<td class='step-details'>StepName - SendKeys, StepDescription - Entered Text - <mark>translate</mark> To Locator - <mark>By.id: firstName</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:51 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.id: lastName)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:51 PM</td>
+					<td class='step-details'>StepName - SendKeys, StepDescription - Entered Text - <mark>English</mark> To Locator - <mark>By.id: lastName</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:52 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.id: address1)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:52 PM</td>
+					<td class='step-details'>StepName - SendKeys, StepDescription - Entered Text - <mark>MyAddress</mark> To Locator - <mark>By.id: address1</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:53 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.id: address2)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:53 PM</td>
+					<td class='step-details'>StepName - SendKeys, StepDescription - Entered Text - <mark>House</mark> To Locator - <mark>By.id: address2</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:54 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.id: city)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:55 PM</td>
+					<td class='step-details'>StepName - SendKeys, StepDescription - Entered Text - <mark>Adamsville</mark> To Locator - <mark>By.id: city</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:56 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.id: state)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:17:57 PM</td>
+					<td class='step-details'>StepName - SelectDropDownByValue, StepDescription - Selected Value - <mark>AL</mark> On Locator - <mark>By.id: state</mark></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:18:07 PM</td>
+					<td class='step-details'>Thread - 13 , Completes Executing Test Method - testContactUs On Browser - ie</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='4'>
+					<div class='test-heading'>
+						<span class='test-name'>TestBreyers_es_ff-testContactUs</span>
+						<span class='test-time'>Mar 15, 2018 02:17:50 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Mar 15, 2018 02:17:50 PM</span>
+	<span class='label end-time'>Mar 15, 2018 02:18:39 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 48s+568ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:18:14 PM</td>
+					<td class='step-details'>Thread - 14 , Executes Next Test Method - testContactUs On Browser - ff</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:18:14 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.id: language)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:18:27 PM</td>
+					<td class='step-details'>StepName - SelectDropDownByText, StepDescription - Selected Visible Text - <mark>Español</mark> On Locator - <mark>By.id: language</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:18:27 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.id: idInquiryType)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:18:27 PM</td>
+					<td class='step-details'>StepName - SelectDropDownByText, StepDescription - Selected Visible Text - <mark>Comentario del producto</mark> On Locator - <mark>By.id: idInquiryType</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:18:27 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.id: emailId)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:18:27 PM</td>
+					<td class='step-details'>StepName - SendKeys, StepDescription - Entered Text - <mark>debasish.pradhan@cignit.com</mark> To Locator - <mark>By.id: emailId</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:18:28 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.id: prefix)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:18:28 PM</td>
+					<td class='step-details'>StepName - SendKeys, StepDescription - Entered Text - <mark>Señor</mark> To Locator - <mark>By.id: prefix</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:18:28 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.id: firstName)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:18:28 PM</td>
+					<td class='step-details'>StepName - SendKeys, StepDescription - Entered Text - <mark>traducir</mark> To Locator - <mark>By.id: firstName</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:18:28 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.id: lastName)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:18:28 PM</td>
+					<td class='step-details'>StepName - SendKeys, StepDescription - Entered Text - <mark>Inglés</mark> To Locator - <mark>By.id: lastName</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:18:28 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.id: address1)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:18:28 PM</td>
+					<td class='step-details'>StepName - SendKeys, StepDescription - Entered Text - <mark>Mi dirección</mark> To Locator - <mark>By.id: address1</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:18:28 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.id: address2)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:18:28 PM</td>
+					<td class='step-details'>StepName - SendKeys, StepDescription - Entered Text - <mark>Casa</mark> To Locator - <mark>By.id: address2</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:18:28 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.id: city)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:18:29 PM</td>
+					<td class='step-details'>StepName - SendKeys, StepDescription - Entered Text - <mark>Alexander City</mark> To Locator - <mark>By.id: city</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:18:29 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.id: state)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:18:29 PM</td>
+					<td class='step-details'>StepName - SelectDropDownByValue, StepDescription - Selected Value - <mark>AL</mark> On Locator - <mark>By.id: state</mark></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:18:39 PM</td>
+					<td class='step-details'>Thread - 14 , Completes Executing Test Method - testContactUs On Browser - ff</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='5'>
+					<div class='test-heading'>
+						<span class='test-name'>TestVaseline_US_FF-validateNavigationAndMenus</span>
+						<span class='test-time'>Mar 15, 2018 02:18:40 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Mar 15, 2018 02:18:40 PM</span>
+	<span class='label end-time'>Mar 15, 2018 02:19:40 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 0s+498ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:19:18 PM</td>
+					<td class='step-details'>Thread - 41 , Executes Next Test Method - validateNavigationAndMenus On Browser - ff</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:18 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[contains(text(),'PRODUCTS')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:18 PM</td>
+					<td class='step-details'>StepName - moveToElement, StepDescription - moveToElement Performed On Locator - <mark>By.xpath: //a[contains(text(),'PRODUCTS')]</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:18 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[contains(text(),'THE VASELINE® STORY')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:19 PM</td>
+					<td class='step-details'>StepName - moveToElement, StepDescription - moveToElement Performed On Locator - <mark>By.xpath: //a[contains(text(),'THE VASELINE® STORY')]</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:19 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[contains(text(),'SKIN HEALTH')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:19 PM</td>
+					<td class='step-details'>StepName - moveToElement, StepDescription - moveToElement Performed On Locator - <mark>By.xpath: //a[contains(text(),'SKIN HEALTH')]</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:19 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[contains(text(),'THE HEALING PROJECT')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:19 PM</td>
+					<td class='step-details'>StepName - moveToElement, StepDescription - moveToElement Performed On Locator - <mark>By.xpath: //a[contains(text(),'THE HEALING PROJECT')]</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:19 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[contains(text(),'LIP TINS')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:19 PM</td>
+					<td class='step-details'>StepName - moveToElement, StepDescription - moveToElement Performed On Locator - <mark>By.xpath: //a[contains(text(),'LIP TINS')]</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:19 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[contains(text(),'WHAT')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:20 PM</td>
+					<td class='step-details'>StepName - moveToElement, StepDescription - moveToElement Performed On Locator - <mark>By.xpath: //a[contains(text(),'WHAT')]</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:20 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[contains(text(),'PRODUCTS')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:20 PM</td>
+					<td class='step-details'>StepName - moveToElement, StepDescription - moveToElement Performed On Locator - <mark>By.xpath: //a[contains(text(),'PRODUCTS')]</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:22 PM</td>
+					<td class='step-details'>StepName - isElementPresent, StepDescription - Element Present - (By - By.xpath: //img[contains(@title,'JELLY')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:22 PM</td>
+					<td class='step-details'>StepName - isElementPresent, StepDescription - Menu Product - JELLY Present<img data-featherlight='ErrorScreenshots\Screenshot_41_1.jpg' width='10%' src='ErrorScreenshots\Screenshot_41_1.jpg' data-src='ErrorScreenshots\Screenshot_41_1.jpg'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:24 PM</td>
+					<td class='step-details'>StepName - isElementPresent, StepDescription - Element Present - (By - By.xpath: //img[contains(@title,'INTENSIVE CARE™')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:24 PM</td>
+					<td class='step-details'>StepName - isElementPresent, StepDescription - Menu Product - INTENSIVE CARE™ Present<img data-featherlight='ErrorScreenshots\Screenshot_41_2.jpg' width='10%' src='ErrorScreenshots\Screenshot_41_2.jpg' data-src='ErrorScreenshots\Screenshot_41_2.jpg'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:26 PM</td>
+					<td class='step-details'>StepName - isElementPresent, StepDescription - Element Present - (By - By.xpath: //img[contains(@title,'LIP THERAPY®')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:26 PM</td>
+					<td class='step-details'>StepName - isElementPresent, StepDescription - Menu Product - LIP THERAPY® Present<img data-featherlight='ErrorScreenshots\Screenshot_41_3.jpg' width='10%' src='ErrorScreenshots\Screenshot_41_3.jpg' data-src='ErrorScreenshots\Screenshot_41_3.jpg'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:28 PM</td>
+					<td class='step-details'>StepName - isElementPresent, StepDescription - Element Present - (By - By.xpath: //img[contains(@title,'MEN')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:29 PM</td>
+					<td class='step-details'>StepName - isElementPresent, StepDescription - Menu Product - MEN Present<img data-featherlight='ErrorScreenshots\Screenshot_41_4.jpg' width='10%' src='ErrorScreenshots\Screenshot_41_4.jpg' data-src='ErrorScreenshots\Screenshot_41_4.jpg'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:29 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //img[contains(@title,'JELLY')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:40 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //img[contains(@title,'JELLY')]</mark></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:19:40 PM</td>
+					<td class='step-details'>Thread - 41 , Completes Executing Test Method - validateNavigationAndMenus On Browser - ff</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='6'>
+					<div class='test-heading'>
+						<span class='test-name'>TestVaseline_CA_Chrome-validateNavigationAndMenus</span>
+						<span class='test-time'>Mar 15, 2018 02:18:40 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Mar 15, 2018 02:18:40 PM</span>
+	<span class='label end-time'>Mar 15, 2018 02:20:36 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 55s+962ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:19:15 PM</td>
+					<td class='step-details'>Thread - 40 , Executes Next Test Method - validateNavigationAndMenus On Browser - chrome</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:15 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[contains(text(),'PRODUCTS')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:15 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //a[contains(text(),'PRODUCTS')]</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:15 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[contains(text(),'THE VASELINE® STORY')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:21 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //a[contains(text(),'THE VASELINE® STORY')]</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:21 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[contains(text(),'SKIN HEALTH')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:26 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //a[contains(text(),'SKIN HEALTH')]</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:26 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[contains(text(),'THE HEALING PROJECT')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:20:11 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //a[contains(text(),'THE HEALING PROJECT')]</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:20:11 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[contains(text(),'LIP TINS')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:20:17 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //a[contains(text(),'LIP TINS')]</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:20:17 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[contains(text(),'PRODUCTS')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:20:17 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //a[contains(text(),'PRODUCTS')]</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:20:19 PM</td>
+					<td class='step-details'>StepName - isElementPresent, StepDescription - Element Present - (By - By.xpath: //img[contains(@title,'JELLY')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:20:20 PM</td>
+					<td class='step-details'>StepName - isElementPresent, StepDescription - Menu Product - JELLY Present<img data-featherlight='ErrorScreenshots\Screenshot_40_1.jpg' width='10%' src='ErrorScreenshots\Screenshot_40_1.jpg' data-src='ErrorScreenshots\Screenshot_40_1.jpg'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:20:22 PM</td>
+					<td class='step-details'>StepName - isElementPresent, StepDescription - Element Present - (By - By.xpath: //img[contains(@title,'INTENSIVE CARE®')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:20:22 PM</td>
+					<td class='step-details'>StepName - isElementPresent, StepDescription - Menu Product - INTENSIVE CARE® Present<img data-featherlight='ErrorScreenshots\Screenshot_40_2.jpg' width='10%' src='ErrorScreenshots\Screenshot_40_2.jpg' data-src='ErrorScreenshots\Screenshot_40_2.jpg'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:20:25 PM</td>
+					<td class='step-details'>StepName - isElementPresent, StepDescription - Element Present - (By - By.xpath: //img[contains(@title,'LIP THERAPY')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:20:25 PM</td>
+					<td class='step-details'>StepName - isElementPresent, StepDescription - Menu Product - LIP THERAPY Present<img data-featherlight='ErrorScreenshots\Screenshot_40_3.jpg' width='10%' src='ErrorScreenshots\Screenshot_40_3.jpg' data-src='ErrorScreenshots\Screenshot_40_3.jpg'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:20:27 PM</td>
+					<td class='step-details'>StepName - isElementPresent, StepDescription - Element Present - (By - By.xpath: //img[contains(@title,'MEN')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:20:28 PM</td>
+					<td class='step-details'>StepName - isElementPresent, StepDescription - Menu Product - MEN Present<img data-featherlight='ErrorScreenshots\Screenshot_40_4.jpg' width='10%' src='ErrorScreenshots\Screenshot_40_4.jpg' data-src='ErrorScreenshots\Screenshot_40_4.jpg'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:20:28 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //img[contains(@title,'JELLY')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:20:36 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //img[contains(@title,'JELLY')]</mark></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:20:36 PM</td>
+					<td class='step-details'>Thread - 40 , Completes Executing Test Method - validateNavigationAndMenus On Browser - chrome</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='7'>
+					<div class='test-heading'>
+						<span class='test-name'>TestVaseline_US_FF-validateReviews</span>
+						<span class='test-time'>Mar 15, 2018 02:19:41 PM</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Mar 15, 2018 02:19:41 PM</span>
+	<span class='label end-time'>Mar 15, 2018 02:20:35 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 54s+381ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:20:20 PM</td>
+					<td class='step-details'>Thread - 41 , Executes Next Test Method - validateReviews On Browser - ff</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:20:21 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[contains(text(),'PRODUCTS')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:20:21 PM</td>
+					<td class='step-details'>StepName - moveToElement, StepDescription - moveToElement Performed On Locator - <mark>By.xpath: //a[contains(text(),'PRODUCTS')]</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:20:21 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //img[contains(@title,'JELLY')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:20:28 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //img[contains(@title,'JELLY')]</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:20:28 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[@title='Vaseline® Jelly Original'])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:20:35 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //a[@title='Vaseline® Jelly Original']</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:20:35 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //span[@itemprop='ratingValue'])</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:20:35 PM</td>
+					<td class='step-details'>Method - <mark>text</mark> returns value - <mark>4.8</mark> for Locator - <mark>By.xpath: //span[@itemprop='ratingValue']</mark></td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>2:20:35 PM</td>
+					<td class='step-details'>StepName - readReview, StepDescription - Item - Vaseline® Jelly Original Expected Review Score - 4.810000, Does Not Match With Actual Score - 4.800000<img data-featherlight='ErrorScreenshots\Screenshot_41_5.jpg' width='10%' src='ErrorScreenshots\Screenshot_41_5.jpg' data-src='ErrorScreenshots\Screenshot_41_5.jpg'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:20:35 PM</td>
+					<td class='step-details'>Thread - 41 , Completes Executing Test Method - validateReviews On Browser - ff</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='8'>
+					<div class='test-heading'>
+						<span class='test-name'>TestVaseline_CA_Chrome-validateReviews</span>
+						<span class='test-time'>Mar 15, 2018 02:20:38 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Mar 15, 2018 02:20:38 PM</span>
+	<span class='label end-time'>Mar 15, 2018 02:21:19 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 41s+694ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:21:09 PM</td>
+					<td class='step-details'>Thread - 40 , Executes Next Test Method - validateReviews On Browser - chrome</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:09 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[contains(text(),'PRODUCTS')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:09 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //a[contains(text(),'PRODUCTS')]</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:09 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //img[contains(@title,'JELLY')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:14 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //img[contains(@title,'JELLY')]</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:15 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[@title='Vaseline® Jelly Original'])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:19 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //a[@title='Vaseline® Jelly Original']</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:19 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //span[@itemprop='ratingValue'])</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:21:19 PM</td>
+					<td class='step-details'>Method - <mark>text</mark> returns value - <mark>4.8</mark> for Locator - <mark>By.xpath: //span[@itemprop='ratingValue']</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:19 PM</td>
+					<td class='step-details'>StepName - readReview, StepDescription - Item - Vaseline® Jelly Original Expected Review Score - 4.800000, Matches With Actual Score - 4.800000<img data-featherlight='ErrorScreenshots\Screenshot_40_5.jpg' width='10%' src='ErrorScreenshots\Screenshot_40_5.jpg' data-src='ErrorScreenshots\Screenshot_40_5.jpg'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:21:19 PM</td>
+					<td class='step-details'>Thread - 40 , Completes Executing Test Method - validateReviews On Browser - chrome</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='9'>
+					<div class='test-heading'>
+						<span class='test-name'>TestVaseline_US_FF-writeReview</span>
+						<span class='test-time'>Mar 15, 2018 02:20:38 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Mar 15, 2018 02:20:38 PM</span>
+	<span class='label end-time'>Mar 15, 2018 02:22:07 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 28s+882ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:21:34 PM</td>
+					<td class='step-details'>Thread - 60 , Executes Next Test Method - writeReview On Browser - ff</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:34 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[contains(text(),'PRODUCTS')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:34 PM</td>
+					<td class='step-details'>StepName - moveToElement, StepDescription - moveToElement Performed On Locator - <mark>By.xpath: //a[contains(text(),'PRODUCTS')]</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:34 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //img[contains(@title,'JELLY')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:41 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //img[contains(@title,'JELLY')]</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:41 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[@title='Vaseline® Jelly Original'])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:48 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //a[@title='Vaseline® Jelly Original']</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:48 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //div[@class='bv-primarySummary-rating-container']//button[contains(text(), 'Write a review')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:48 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //div[@class='bv-primarySummary-rating-container']//button[contains(text(), 'Write a review')]</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:51 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //span[contains(text(),'Overall Rating*')]/parent::span/parent::legend/following::span[1]/following-sibling::span//span[text()='Good']/preceding-sibling::span)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:51 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //span[contains(text(),'Overall Rating*')]/parent::span/parent::legend/following::span[1]/following-sibling::span//span[text()='Good']/preceding-sibling::span</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:52 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.name: title)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:52 PM</td>
+					<td class='step-details'>StepName - SendKeys, StepDescription - Entered Text - <mark>Vaseline Review</mark> To Locator - <mark>By.name: title</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:52 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.name: reviewtext)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:52 PM</td>
+					<td class='step-details'>StepName - SendKeys, StepDescription - Entered Text - <mark>Its is good product to use. No side effects.</mark> To Locator - <mark>By.name: reviewtext</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:52 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.name: usernickname)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:52 PM</td>
+					<td class='step-details'>StepName - SendKeys, StepDescription - Entered Text - <mark>Cigniti</mark> To Locator - <mark>By.name: usernickname</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:53 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.name: additionalfield_Zipcode)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:53 PM</td>
+					<td class='step-details'>StepName - SendKeys, StepDescription - Entered Text - <mark>502032.0</mark> To Locator - <mark>By.name: additionalfield_Zipcode</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:53 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.name: hostedauthentication_authenticationemail)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:53 PM</td>
+					<td class='step-details'>StepName - SendKeys, StepDescription - Entered Text - <mark>abc@cigniti.com</mark> To Locator - <mark>By.name: hostedauthentication_authenticationemail</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:54 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.name: contextdatavalue_BirthMonth)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:54 PM</td>
+					<td class='step-details'>StepName - SelectDropDownByValue, StepDescription - Selected Value - <mark>January</mark> On Locator - <mark>By.name: contextdatavalue_BirthMonth</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:54 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.name: contextdatavalue_BirthYear)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:55 PM</td>
+					<td class='step-details'>StepName - SelectDropDownByValue, StepDescription - Selected Value - <mark>2010</mark> On Locator - <mark>By.name: contextdatavalue_BirthYear</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:55 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.name: contextdatavalue_Gender)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:56 PM</td>
+					<td class='step-details'>StepName - SelectDropDownByValue, StepDescription - Selected Value - <mark>Male</mark> On Locator - <mark>By.name: contextdatavalue_Gender</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:56 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //label[@class='bv-radio-wrapper-label' and text()='6']/parent::li)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:56 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //label[@class='bv-radio-wrapper-label' and text()='6']/parent::li</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:57 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.name: agreedtotermsandconditions)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:57 PM</td>
+					<td class='step-details'>StepName - checkCheckBox, StepDescription - check-box - <mark>By.name: agreedtotermsandconditions</mark> checked successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:22:07 PM</td>
+					<td class='step-details'>Thread - 60 , Completes Executing Test Method - writeReview On Browser - ff</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='10'>
+					<div class='test-heading'>
+						<span class='test-name'>TestVaseline_CA_Chrome-writeReview</span>
+						<span class='test-time'>Mar 15, 2018 02:21:21 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Mar 15, 2018 02:21:21 PM</span>
+	<span class='label end-time'>Mar 15, 2018 02:22:17 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 55s+512ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:21:45 PM</td>
+					<td class='step-details'>Thread - 67 , Executes Next Test Method - writeReview On Browser - chrome</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:46 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[contains(text(),'PRODUCTS')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:46 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //a[contains(text(),'PRODUCTS')]</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:46 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //img[contains(@title,'JELLY')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:53 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //img[contains(@title,'JELLY')]</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:53 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //a[@title='Vaseline® Jelly Original'])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:57 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //a[@title='Vaseline® Jelly Original']</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:57 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //div[@class='bv-primarySummary-rating-container']//button[contains(text(), 'Write a review')])</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:21:58 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //div[@class='bv-primarySummary-rating-container']//button[contains(text(), 'Write a review')]</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:22:01 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //span[contains(text(),'Overall Rating*')]/parent::span/parent::legend/following::span[1]/following-sibling::span//span[text()='Good']/preceding-sibling::span)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:22:01 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //span[contains(text(),'Overall Rating*')]/parent::span/parent::legend/following::span[1]/following-sibling::span//span[text()='Good']/preceding-sibling::span</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:22:01 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.name: title)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:22:02 PM</td>
+					<td class='step-details'>StepName - SendKeys, StepDescription - Entered Text - <mark>Vaseline Review</mark> To Locator - <mark>By.name: title</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:22:02 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.name: reviewtext)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:22:03 PM</td>
+					<td class='step-details'>StepName - SendKeys, StepDescription - Entered Text - <mark>Its is good product to use. No side effects.</mark> To Locator - <mark>By.name: reviewtext</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:22:03 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.name: usernickname)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:22:04 PM</td>
+					<td class='step-details'>StepName - SendKeys, StepDescription - Entered Text - <mark>Cigniti</mark> To Locator - <mark>By.name: usernickname</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:22:04 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.name: userlocation)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:22:04 PM</td>
+					<td class='step-details'>StepName - SendKeys, StepDescription - Entered Text - <mark>502032.0</mark> To Locator - <mark>By.name: userlocation</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:22:04 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.name: hostedauthentication_authenticationemail)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:22:05 PM</td>
+					<td class='step-details'>StepName - SendKeys, StepDescription - Entered Text - <mark>abc@cigniti.com</mark> To Locator - <mark>By.name: hostedauthentication_authenticationemail</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:22:05 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.name: contextdatavalue_Age)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:22:05 PM</td>
+					<td class='step-details'>StepName - SelectDropDownByValue, StepDescription - Selected Value - <mark>18to24</mark> On Locator - <mark>By.name: contextdatavalue_Age</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:22:05 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.name: contextdatavalue_Gender)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:22:06 PM</td>
+					<td class='step-details'>StepName - SelectDropDownByValue, StepDescription - Selected Value - <mark>Male</mark> On Locator - <mark>By.name: contextdatavalue_Gender</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:22:06 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.xpath: //label[@class='bv-radio-wrapper-label' and text()='6']/parent::li)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:22:06 PM</td>
+					<td class='step-details'>StepName - Click, StepDescription - Click Performed On Locator - <mark>By.xpath: //label[@class='bv-radio-wrapper-label' and text()='6']/parent::li</mark></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:22:06 PM</td>
+					<td class='step-details'>StepName - waitUntilElementIsClickable, StepDescription - Element clickable - (By - By.name: agreedtotermsandconditions)</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:22:07 PM</td>
+					<td class='step-details'>StepName - checkCheckBox, StepDescription - check-box - <mark>By.name: agreedtotermsandconditions</mark> checked successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>2:22:17 PM</td>
+					<td class='step-details'>Thread - 67 , Completes Executing Test Method - writeReview On Browser - chrome</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- subview left -->
+
+	<div class='subview-right left'>
+		<div class='view-summary'>
+			<h5 class='test-name'></h5>
+
+			<div id='step-filters' class="right">
+				<span class="blue-text" status="info" alt="info" title="info"><i class="material-icons">info_outline</i></span>
+				<span class="green-text" status="pass" alt="pass" title="pass"><i class="material-icons">check_circle</i></span>
+				<span class="red-text" status="fail" alt="fail" title="fail"><i class="material-icons">cancel</i></span>
+				<span class="red-text text-darken-4" status="fatal" alt="fatal" title="fatal"><i class="material-icons">cancel</i></span>
+				<span class="pink-text text-lighten-1" status="error" alt="error" title="error"><i class="material-icons">error</i></span>
+				<span class="orange-text" alt="warning" status="warning" title="warning"><i class="material-icons">warning</i></span>
+				<span class="teal-text" status="skip" alt="skip" title="skip"><i class="material-icons">redo</i></span>
+				<span status="clear" alt="Clear filters" title="Clear filters"><i class="material-icons">clear</i></span>
+			</div>
+		</div>
+	</div>
+	<!-- subview right -->
+
+</div>
+<!-- test view -->
+<!-- category view -->
+<!-- exception view -->
+<div id='dashboard-view' class='view hide'>
+	<div class='card-panel transparent np-v'>
+		<h5>Dashboard</h5>
+
+		<div class='row'>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Tests
+					<div class='panel-lead'>10</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Steps
+					<div class='panel-lead'>232</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Start
+					<div class='panel-lead'>Mar 15, 2018 02:15:46 PM</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+			 		End
+			 		<div class='panel-lead'>Mar 15, 2018 02:22:18 PM</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Time Taken
+					<div class='panel-lead'>0h 6m 31s+371ms</div>
+				</div>
+			</div>
+			<div class='col s4'>
+				<div class='card-panel dashboard-environment'>
+					<span class='right label cyan white-text'>Environment</span><p>&nbsp;</p>
+					
+					<table>
+						<tr>
+							<th>Name</th>
+							<th>Value</th>
+						</tr>
+							<tr>
+								<td>IP</td>
+								<td>10.62.64.233</td>
+							</tr>
+							<tr>
+								<td>Host Name</td>
+								<td>HW1203</td>
+							</tr>
+							<tr>
+								<td>User Name</td>
+								<td>E001518</td>
+							</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- dashboard view -->
+<!-- testrunner-logs view -->
+		</div>
+		<!-- container -->
+
+		<script>
+			var statusGroup = {
+				passParent: 9,
+				failParent: 1,
+				fatalParent: 0,
+				errorParent: 0,
+				warningParent: 0,
+				skipParent: 0,
+				exceptionsParent: 1,
+				
+				passChild: 193,
+				failChild: 1,
+				fatalChild: 0,
+				errorChild: 0,
+				warningChild: 0,
+				skipChild: 0,
+				infoChild: 38,
+				exceptionsChild: 1,
+				
+				passGrandChild: 0,
+				failGrandChild: 0,
+				fatalGrandChild: 0,
+				errorGrandChild: 0,
+				warningGrandChild: 0,
+				skipGrandChild: 0,
+				infoGrandChild: 0,
+				exceptionsGrandChild: 0,
+			};
+		</script>
+		
+			<script src='https://cdn.rawgit.com/anshooarora/extentreports-java/fca20fb7653aade98810546ab96a2a4360e3e712/dist/js/extent.js' type='text/javascript'></script>
+		
+		
+ 		<script type='text/javascript'>
+ 			
+            
+                $(document).ready(function() {
+                    
+                });
+            
+        
+ 		</script>
+	</body>
+	
+</html>

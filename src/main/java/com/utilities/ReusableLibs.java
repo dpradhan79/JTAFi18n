@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
@@ -232,13 +233,13 @@ public class ReusableLibs
 	{
 		String fileName = null;
 		int count = 1;
-		String strScreenshotFileName = String.format("%s%s%s%d.%s", screenshotFolder, File.separatorChar, "Screenshot_", count, extension);
+		String strScreenshotFileName = String.format("%s%s%s_%d_%s_%d.%s", screenshotFolder, File.separatorChar, "Screenshot", Thread.currentThread().getId(), new SimpleDateFormat("dd-MM-yyyy_HH_mm_ss_SSS").format(new Date()), count, extension);
 		
 		while(fileExists(strScreenshotFileName))
 		{
 			//get new file name
 			//increase count
-			strScreenshotFileName = String.format("%s%s%s%d.%s", screenshotFolder, File.separatorChar, "Screenshot_", ++count, extension);
+			strScreenshotFileName = String.format("%s%s%s_%d_%s_%d.%s", screenshotFolder, File.separatorChar, "Screenshot", Thread.currentThread().getId(),  new SimpleDateFormat("dd-MM-yyyy_HH_mm_ss_SSS").format(new Date()), ++count, extension);
 			
 		}		
 		fileName = strScreenshotFileName;

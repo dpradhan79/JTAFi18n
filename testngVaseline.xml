@@ -6,6 +6,7 @@
   <parameter name="menuItemSelection" value="JELLY" />
   <parameter name="reviewItem" value="Vaseline® Jelly Original" />
   
+   <!-- Test For Canada Region  On Chrome -->
   <test name="TestVaseline_CA_Chrome">
   <parameter name="Browser" value="chrome" />
   <parameter name="TestData" value="WebAutomationTestData_ca.xlsx" />
@@ -17,8 +18,9 @@
   <classes>
   <class name = "dweb.test.i18n.vaseline.functionaltests.TestProducts" />  
   </classes>
-  </test> <!-- Test -->
+  </test>
   
+  <!-- Test For US Region  On Firefox -->
   <test name="TestVaseline_US_FF">
   <parameter name="Browser" value="ff" />
   <parameter name="TestData" value="WebAutomationTestData_us.xlsx" />
@@ -31,5 +33,5 @@
   <classes>
   <class name = "dweb.test.i18n.vaseline.functionaltests.TestProducts" />  
   </classes>
-  </test> <!-- Test -->
+  </test>
 </suite> <!-- Suite -->

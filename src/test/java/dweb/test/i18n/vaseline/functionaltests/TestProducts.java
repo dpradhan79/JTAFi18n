@@ -46,7 +46,7 @@ public class TestProducts extends TestTemplateMethodLevelInit{
 	}
 	
 	@Test
-	public void validateReviews(ITestContext testContext)
+	public void validateReviews(ITestContext testContext) throws InterruptedException
 	{
 		String localeCountryCode = this.getTestParameter(testContext, "localeCountry");		
 		String menuSelection = this.getTestParameter(testContext, "menuSelection");
@@ -58,14 +58,16 @@ public class TestProducts extends TestTemplateMethodLevelInit{
 		IVaselineUserOperations vCountry = getVaselineLocalizedOperations(localeCountryCode);
 		//select Menu
 		vCountry.selectMenu(menuSelection);
+		Thread.sleep(5000);
 		//Select Product Item
 		vCountry.selectMenuProduct(menuItemSelection);
+		Thread.sleep(5000);
 		//review
 		vCountry.readReview(reviewItem, Float.parseFloat(expectedRating));
 	}
 	
 	@Test(dataProvider = "getDataFromExcel")
-	public void writeReview(Hashtable<String, String> data, ITestContext testContext)
+	public void writeReview(Hashtable<String, String> data, ITestContext testContext) throws InterruptedException
 	{
 		String localeCountryCode = this.getTestParameter(testContext, "localeCountry");		
 		String menuSelection = this.getTestParameter(testContext, "menuSelection");
@@ -77,8 +79,10 @@ public class TestProducts extends TestTemplateMethodLevelInit{
 		IVaselineUserOperations vCountry = getVaselineLocalizedOperations(localeCountryCode);
 		//select Menu
 		vCountry.selectMenu(menuSelection);
+		Thread.sleep(5000);
 		//Select Product Item
 		vCountry.selectMenuProduct(menuItemSelection);
+		Thread.sleep(5000);
 		//write review
 		Map<String, String> mapReviewInfo = new Hashtable<String, String>();
 		mapReviewInfo.put("OverallRating", data.get("OverallRating"));
@@ -93,13 +97,9 @@ public class TestProducts extends TestTemplateMethodLevelInit{
 		mapReviewInfo.put("Gender", data.get("Gender"));
 		mapReviewInfo.put("RecommendRating", data.get("RecommendRating"));
 		
-		vCountry.writeReview(reviewItem, mapReviewInfo);
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		vCountry.writeReview(reviewItem, mapReviewInfo);		
+		Thread.sleep(10000);
+	
 	}
 
 }
