@@ -2,8 +2,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="SuiteTestBreyers" parallel="tests" thread-count="5" preserve-order="true">
   <parameter name="APPURL" value="https://secure.breyers.com/contactus" />
-  <!-- Test For English On IE -->
-  <test name="TestBreyers_en_ie" preserve-order="true">
+  <!-- Test For English On Desktop IE -->
+  <!-- <test name="TestBreyers_en_ie" preserve-order="true">
+  <parameter name="deviceName" value="desktop" />
   <parameter name="language" value="en" />
   <parameter name="Browser" value="ie" />
      <classes>     
@@ -11,12 +12,40 @@
     </classes>
   </test>
   
-   <!-- Test For Spanish On Firefox -->
+   Test For Spanish On Desktop Firefox
   <test name="TestBreyers_es_ff" preserve-order="true">
+    <parameter name="deviceName" value="desktop" />
   	<parameter name="language" value="es" />
   	<parameter name="Browser" value="ff" />
     <classes>
       <class name="dweb.test.i18n.breyers.functionaltests.TestBreyers"/>
     </classes>
-  </test> <!-- TestBreyers -->  
+  </test> -->
+  
+  <!-- Test For Spanish On Mobile Nexus Emulator -->
+ <!--  <test name="TestBreyers_es_Mobile_1" preserve-order="true">
+  	<parameter name="APPURL" value="https://secure.breyers.com" />
+  	<parameter name="appiumHub" value="http://0.0.0.0:4723/wd/hub" />
+  	<parameter name="language" value="es" />
+  	<parameter name="Browser" value="Mobile" />
+    <classes>
+      <class name="mweb.test.i18n.breyers.functionaltests.TestBreyers"/>
+    </classes>
+  </test>  -->
+  
+   <!-- Test For English On Mobile Nexus Emulator -->
+  <test name="TestBreyers_es_Mobile_Physical_LG Stylus 3" preserve-order="true">
+    <parameter name="deviceName" value="LG Stylus 3" />
+    <parameter name="appiumHub" value="http://0.0.0.0:4723/wd/hub" />
+    <parameter name="mobileAutomationName" value="UiAutomator2" />
+    <parameter name="mobilePlatformName" value="Android" />
+    <parameter name="mobilePlatformVersion" value="7.0" />
+    <parameter name="mobileDeviceName" value="LG Stylus 3" />    
+  	<parameter name="APPURL" value="https://secure.breyers.com" />  	
+  	<parameter name="language" value="us" />
+  	<parameter name="browser" value="Chrome" />
+    <classes>
+      <class name="mweb.test.i18n.breyers.functionaltests.TestBreyers"/>
+    </classes>
+  </test> 
 </suite>

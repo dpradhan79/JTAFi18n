@@ -28,26 +28,30 @@ import com.utilities.ReusableLibs;
 import dweb.aut.i18n.vaseline.interfaces.IVaselineUserOperations;
 import dweb.aut.i18n.vaseline.regional.VaselineCanadaOperations;
 import dweb.aut.i18n.vaseline.regional.VaselineUSOperations;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 
 /**
  * Class with configuration for test execution
+ * 
  * @author E001518 - Debasish Pradhan (Architect)
  *
  */
 public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 
-	private static final Logger LOG = Logger.getLogger(TestTemplateMethodLevelInit.class);	
+	private static final Logger LOG = Logger.getLogger(TestTemplateMethodLevelInit.class);
 
-/**
- * Configuration/Initialization before starting suite
- * @param testContext
- * @param xmlTest
- * @throws Exception
- */
+	/**
+	 * Configuration/Initialization before starting suite
+	 * 
+	 * @param testContext
+	 * @param xmlTest
+	 * @throws Exception
+	 */
 	@BeforeSuite
 	protected void beforeSuite(ITestContext testContext, XmlTest xmlTest) throws Exception {
 
-		LOG.info(String.format("Suite To Be Executed Next -  %s", testContext.getSuite().getName()));		
+		LOG.info(String.format("Suite To Be Executed Next -  %s", testContext.getSuite().getName()));
 		TestTemplate.implicitWaitInSecs = ReusableLibs.getConfigProperty("ImplicitWaitInSecs");
 		TestTemplate.pageLoadTimeOutInSecs = ReusableLibs.getConfigProperty("PageLoadTimeOutInSecs");
 		String extentTestVisibilityMode = ReusableLibs.getConfigProperty("extentTestVisibilityMode");
@@ -55,16 +59,16 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 		TestTemplate.testReport = ReportFactory.getInstance(ReportType.ExtentHtml,
 				ExtentTestVisibilityMode.valueOf(extentTestVisibilityMode));
 	}
-	
+
 	@AfterSuite
-	protected void afterSuite(ITestContext testContext)
-	{
+	protected void afterSuite(ITestContext testContext) {
 		LOG.info(String.format("Suite - %s , Completed", testContext.getSuite().getName()));
-		TestTemplate.testReport.updateTestCaseStatus();		
+		TestTemplate.testReport.updateTestCaseStatus();
 	}
-	
+
 	/**
 	 * Configuration/Initialization before running each test
+	 * 
 	 * @param testContext
 	 */
 	@BeforeTest
@@ -81,28 +85,29 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 
 	/**
 	 * Configuration/Initialization after running each test
+	 * 
 	 * @param testContext
 	 */
 	@AfterTest
 	protected void afterTest(ITestContext testContext) {
 		LOG.info(String.format("Test - %s , Completed", testContext.getCurrentXmlTest().getName()));
 		TestTemplate.testReport.updateTestCaseStatus();
-		if(threadLocalWebDriver.get() != null)
-		{
+		if (threadLocalWebDriver.get() != null) {
 			threadLocalWebDriver.get().quit();
 		}
 	}
 
 	/**
-	 * Configuration/Initialization before running each test case
-	 * Driver is initialized before running each test method
+	 * Configuration/Initialization before running each test case Driver is
+	 * initialized before running each test method
+	 * 
 	 * @param testContext
 	 * @param m
 	 * @throws URISyntaxException
 	 */
 	@BeforeMethod
 	protected void beforeMethod(ITestContext testContext, Method m) throws URISyntaxException {
-		
+
 		try {
 			LOG.info(String.format("Thread - %d , Executes Next Test Method - %s", Thread.currentThread().getId(),
 					m.getName()));
@@ -126,32 +131,32 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 
 			// Use browser specific wd as provided in Test Suite XML or else use
 			// chromedriver
-			String browser = this.getTestParameter(testContext, "Browser");
-			webDriver = WebDriverFactory.getWebDriver(browser);
-			try
-			{
+			//String browser = this.getTestParameter(testContext, "Browser");
+			webDriver = WebDriverFactory.getWebDriver(this.getAllTestParameters(testContext));
+			try {
 				webDriver.get(url);
+			} catch (TimeoutException ex) {
+				LOG.error(String.format("Browser Takes More Time To Load, Time Out Defined - %s",
+						TestTemplate.pageLoadTimeOutInSecs));
 			}
-			catch(TimeoutException ex)
-			{
-				LOG.error(String.format("Browser Takes More Time To Load, Time Out Defined - %s", TestTemplate.pageLoadTimeOutInSecs));
-			}
-			threadLocalWebDriver.set(webDriver);	
+			threadLocalWebDriver.set(webDriver);
 
 		} catch (Exception ex) {
 			LOG.error(String.format("Exception Encountered - %s", ex.getMessage()));
 			TestTemplate.testReport.logException(ex);
 
 		} finally {
-			TestTemplate.testReport.logInfo(String.format("Thread - %d , Executes Next Test Method - %s On Browser - %s",
-					Thread.currentThread().getId(), m.getName(), this.getTestParameter(testContext, "Browser")));
+			TestTemplate.testReport.logInfo(String.format(
+					"Thread - %d , Executes Next Test Method - %s On Browser - %s", Thread.currentThread().getId(),
+					m.getName(), this.getTestParameter(testContext, "Browser")));
 		}
 
 	}
 
 	/**
-	 * Configuration/Initialization after running each test case
-	 * webdriver is killed after each test case execution
+	 * Configuration/Initialization after running each test case webdriver is killed
+	 * after each test case execution
+	 * 
 	 * @param testContext
 	 * @param testResult
 	 * @param m
@@ -161,11 +166,15 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 	protected void afterMethod(ITestContext testContext, ITestResult testResult, Method m) throws Exception {
 		LOG.info(String.format("Thread - %d , Completes Executing Test Method - %s", Thread.currentThread().getId(),
 				m.getName()));
-		TestTemplate.testReport.logInfo(String.format("Thread - %d , Completes Executing Test Method - %s On Browser - %s",
-				Thread.currentThread().getId(), m.getName(), this.getTestParameter(testContext, "Browser")));
-		
+		TestTemplate.testReport
+				.logInfo(String.format("Thread - %d , Completes Executing Test Method - %s On Browser - %s",
+						Thread.currentThread().getId(), m.getName(), this.getTestParameter(testContext, "Browser")));
+
 		try {
 			threadLocalWebDriver.get().close();
+			if (threadLocalWebDriver.get() instanceof AppiumDriver) {
+				((AppiumDriver<?>) threadLocalWebDriver.get()).closeApp();
+			}
 		} catch (Exception ex) {
 			LOG.error(
 					String.format("Exception Encountered - %s, StackTrace - %s", ex.getMessage(), ex.getStackTrace()));
@@ -182,37 +191,34 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 			TestTemplate.testReport.updateTestCaseStatus();
 		}
 	}
-	
-	protected IVaselineUserOperations getVaselineLocalizedOperations(String localeLanguageCode, String localeCountryCode)
-	{
+
+	protected IVaselineUserOperations getVaselineLocalizedOperations(String localeLanguageCode,
+			String localeCountryCode) {
 		IVaselineUserOperations countryVaseline = null;
 		Locale locale = new Locale(localeLanguageCode, localeCountryCode);
-		if(locale.equals(new Locale("en", "us")))
-		{
-			countryVaseline = new VaselineUSOperations(threadLocalWebDriver.get(), TestTemplate.testReport, locale, IConstants.PAGE_ELEMENTS_BASEFILENAME);
+		if (locale.equals(new Locale("en", "us"))) {
+			countryVaseline = new VaselineUSOperations(threadLocalWebDriver.get(), TestTemplate.testReport, locale,
+					IConstants.PAGE_ELEMENTS_BASEFILENAME);
+		} else if (locale.equals(new Locale("en", "ca"))) {
+			countryVaseline = new VaselineUSOperations(threadLocalWebDriver.get(), TestTemplate.testReport, locale,
+					IConstants.PAGE_ELEMENTS_BASEFILENAME);
 		}
-		else if(locale.equals(new Locale("en", "ca")))
-		{
-			countryVaseline = new VaselineUSOperations(threadLocalWebDriver.get(), TestTemplate.testReport, locale, IConstants.PAGE_ELEMENTS_BASEFILENAME);
-		}
-		
+
 		return countryVaseline;
 	}
-	
-	protected IVaselineUserOperations getVaselineLocalizedOperations(String localeCountryCode)
-	{
+
+	protected IVaselineUserOperations getVaselineLocalizedOperations(String localeCountryCode) {
 		IVaselineUserOperations countryVaseline = null;
 		String defaultLanguage = "en";
 		Locale locale = new Locale(defaultLanguage, localeCountryCode);
-		if(locale.equals(new Locale(defaultLanguage, "us")))
-		{
-			countryVaseline = new VaselineUSOperations(threadLocalWebDriver.get(), TestTemplate.testReport, locale, IConstants.PAGE_ELEMENTS_BASEFILENAME);
+		if (locale.equals(new Locale(defaultLanguage, "us"))) {
+			countryVaseline = new VaselineUSOperations(threadLocalWebDriver.get(), TestTemplate.testReport, locale,
+					IConstants.PAGE_ELEMENTS_BASEFILENAME);
+		} else if (locale.equals(new Locale(defaultLanguage, "ca"))) {
+			countryVaseline = new VaselineCanadaOperations(threadLocalWebDriver.get(), TestTemplate.testReport, locale,
+					IConstants.PAGE_ELEMENTS_BASEFILENAME);
 		}
-		else if(locale.equals(new Locale(defaultLanguage, "ca")))
-		{
-			countryVaseline = new VaselineCanadaOperations(threadLocalWebDriver.get(), TestTemplate.testReport, locale, IConstants.PAGE_ELEMENTS_BASEFILENAME);
-		}
-		
+
 		return countryVaseline;
 	}
 

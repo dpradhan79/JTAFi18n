@@ -11,7 +11,8 @@ import dweb.aut.pages.i18n.breyers.ContactUsPage;
 import dweb.aut.pages.i18n.breyers.HomePage;
 import dweb.test.templates.TestTemplateMethodLevelInit;
 
-public class TestBreyers extends TestTemplateMethodLevelInit {
+@Test(groups = {"web"})
+public class TestBreyers extends TestTemplateMethodLevelInit {	
 	
 	@Test(priority=1)
 	public void testMenus(ITestContext testContext) {
@@ -21,7 +22,7 @@ public class TestBreyers extends TestTemplateMethodLevelInit {
 		String url = this.getTestParameter(testContext, "APPURL");
 		TestTemplateMethodLevelInit.threadLocalWebDriver.get().get(url.substring(0, url.lastIndexOf("/")));
 		homePage.selectLanguage();
-		homePage.ClickMenus();
+		homePage.clickMenus();
 	}
 
 	@Test(priority=2)

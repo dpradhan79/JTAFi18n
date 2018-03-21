@@ -1,6 +1,5 @@
 package dweb.test.i18n.vaseline.functionaltests;
 
-import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 
@@ -10,6 +9,7 @@ import org.testng.annotations.Test;
 import dweb.aut.i18n.vaseline.interfaces.IVaselineUserOperations;
 import dweb.test.templates.TestTemplateMethodLevelInit;
 
+@Test(groups = {"web"})
 public class TestProducts extends TestTemplateMethodLevelInit{
 	
 	@Test	
