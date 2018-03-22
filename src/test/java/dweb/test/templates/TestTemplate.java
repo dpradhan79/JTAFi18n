@@ -9,9 +9,11 @@ import java.util.Map;
 import org.apache.commons.collections.iterators.EntrySetMapIterator;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.ITestContext;
 import org.testng.annotations.DataProvider;
 
+import com.config.ITestParamsConstants;
 import com.excel.Xls_Reader;
 import com.gargoylesoftware.htmlunit.javascript.host.Set;
 import com.google.common.io.Resources;
@@ -52,21 +54,59 @@ public abstract class TestTemplate {
 		return parameterVal;
 	}
 
+	/**
+	 * 
+	 * @param testContext
+	 * @return
+	 */
 	protected Map<String, String> getAllTestParameters(ITestContext testContext) {
 		return testContext.getCurrentXmlTest().getAllParameters();
 	}
 
-	protected Map<String, String> getAllTestParameters(ITestContext testContext, String pattern) {
+	/**
+	 * 
+	 * @param testContext
+	 * @param regExp
+	 * @return
+	 */
+	protected Map<String, String> getAllTestParameters(ITestContext testContext, String regExp) {
 		Map<String, String> mapMobileParams = new HashMap<String, String>();
 		this.getAllTestParameters(testContext).forEach((k, v) -> {
-			if (k.matches(pattern)) {
+			if (k.matches(regExp)) {
 				mapMobileParams.put(k, v);
 			}
 		});
 
 		return mapMobileParams;
 	}
-
+	
+	protected DesiredCapabilities convertTestParamsToCapabilities(ITestContext testContext)
+	{
+		DesiredCapabilities cap = new DesiredCapabilities();
+		cap.setBrowserName(this.getTestParameter(testContext, ITestParamsConstants.BROWSER));
+		this.getAllTestParameters(testContext).forEach((k, v) ->{
+			cap.setCapability(k, v);
+		});
+		
+		return cap;
+	}
+	
+	/**
+	 * 
+	 * @param testContext
+	 * @param regExp
+	 * @return
+	 */
+	protected DesiredCapabilities convertTestParamsToCapabilities(ITestContext testContext, String regExp)
+	{
+		DesiredCapabilities cap = new DesiredCapabilities();
+		cap.setBrowserName(this.getTestParameter(testContext, ITestParamsConstants.BROWSER));
+		this.getAllTestParameters(testContext, regExp).forEach((k, v) ->{
+			cap.setCapability(k, v);
+		});
+		
+		return cap;
+	}
 	/**
 	 * Dataprovider to return data matrix from excel
 	 * 
@@ -88,8 +128,8 @@ public abstract class TestTemplate {
 	 * @return
 	 */
 	protected String getScreenShotName() {
-		String screenShotLocation = ReusableLibs.getConfigProperty("ScreenshotLocation");
-		String fileExtension = ReusableLibs.getConfigProperty("ScreenshotPictureFormat");
+		String screenShotLocation = ReusableLibs.getConfigProperty(ITestParamsConstants.SCREENSHOT_LOCATION);
+		String fileExtension = ReusableLibs.getConfigProperty(ITestParamsConstants.SCREENSHOT_PICTURE_FORMAT);
 		synchronized (this) {
 			String screenShotName = ReusableLibs.getScreenshotFile(screenShotLocation, fileExtension);
 			LOG.debug(String.format("ScreenShot Name For Captured Screen Shot = %s", screenShotName));

@@ -6,6 +6,7 @@ import org.testng.ITestContext;
 import org.testng.annotations.Test;
 
 import com.config.IConstants;
+import com.config.ITestParamsConstants;
 
 import dweb.test.templates.TestTemplateMethodLevelInit;
 import mweb.aut.pages.i18n.breyers.HomePage;
@@ -45,7 +46,7 @@ public class TestBreyers extends TestTemplateMethodLevelInit{
 		}*/
 		
 		HomePage homePage = new HomePage(TestTemplateMethodLevelInit.threadLocalWebDriver.get(),
-				TestTemplateMethodLevelInit.testReport, new Locale(this.getTestParameter(testContext, "language")),
+				TestTemplateMethodLevelInit.testReport, new Locale(this.getTestParameter(testContext, ITestParamsConstants.LOCALE_LANGUAGE)),
 				IConstants.PAGE_ELEMENTS_BASEFILENAME);		
 		homePage.selectLanguage();
 		homePage.clickMenus();

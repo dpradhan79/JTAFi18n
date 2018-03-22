@@ -18,6 +18,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.xml.XmlTest;
 
 import com.config.IConstants;
+import com.config.ITestParamsConstants;
 import com.factories.WebDriverFactory;
 import com.testreport.ExtentReporter;
 import com.testreport.ExtentReporter.ExtentTestVisibilityMode;
@@ -52,9 +53,9 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 	protected void beforeSuite(ITestContext testContext, XmlTest xmlTest) throws Exception {
 
 		LOG.info(String.format("Suite To Be Executed Next -  %s", testContext.getSuite().getName()));
-		TestTemplate.implicitWaitInSecs = ReusableLibs.getConfigProperty("ImplicitWaitInSecs");
-		TestTemplate.pageLoadTimeOutInSecs = ReusableLibs.getConfigProperty("PageLoadTimeOutInSecs");
-		String extentTestVisibilityMode = ReusableLibs.getConfigProperty("extentTestVisibilityMode");
+		TestTemplate.implicitWaitInSecs = ReusableLibs.getConfigProperty(ITestParamsConstants.IMPLICIT_WAIT_IN_SECS);
+		TestTemplate.pageLoadTimeOutInSecs = ReusableLibs.getConfigProperty(ITestParamsConstants.PAGE_LOAD_TIME_OUT_IN_SECS);
+		String extentTestVisibilityMode = ReusableLibs.getConfigProperty(ITestParamsConstants.EXTENT_TEST_VISIBILITY_MODE);
 
 		TestTemplate.testReport = ReportFactory.getInstance(ReportType.ExtentHtml,
 				ExtentTestVisibilityMode.valueOf(extentTestVisibilityMode));
@@ -127,7 +128,7 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 			}
 
 			// Use APPURL if provided in Test Suite XML
-			String url = this.getTestParameter(testContext, "APPURL");
+			String url = this.getTestParameter(testContext, ITestParamsConstants.APPURL);
 
 			// Use browser specific wd as provided in Test Suite XML or else use
 			// chromedriver
@@ -148,7 +149,7 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 		} finally {
 			TestTemplate.testReport.logInfo(String.format(
 					"Thread - %d , Executes Next Test Method - %s On Browser - %s", Thread.currentThread().getId(),
-					m.getName(), this.getTestParameter(testContext, "Browser")));
+					m.getName(), this.getTestParameter(testContext, ITestParamsConstants.BROWSER)));
 		}
 
 	}
@@ -168,7 +169,7 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 				m.getName()));
 		TestTemplate.testReport
 				.logInfo(String.format("Thread - %d , Completes Executing Test Method - %s On Browser - %s",
-						Thread.currentThread().getId(), m.getName(), this.getTestParameter(testContext, "Browser")));
+						Thread.currentThread().getId(), m.getName(), this.getTestParameter(testContext, ITestParamsConstants.BROWSER)));
 
 		try {
 			threadLocalWebDriver.get().close();

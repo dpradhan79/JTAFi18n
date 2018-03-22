@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="SuiteTestBreyers" parallel="tests" thread-count="5" preserve-order="true">
-  <parameter name="APPURL" value="https://secure.breyers.com/contactus" />
+  <parameter name="appURL" value="https://secure.breyers.com/contactus" />
   <!-- Test For English On Desktop IE -->
   <!-- <test name="TestBreyers_en_ie" preserve-order="true">
-  <parameter name="deviceName" value="desktop" />
-  <parameter name="language" value="en" />
-  <parameter name="Browser" value="ie" />
+  <parameter name="automationKit" value="selenium" />
+  <parameter name="localeLanguage" value="en" />
+  <parameter name="browserName" value="ie" />
      <classes>     
       <class name="dweb.test.i18n.breyers.functionaltests.TestBreyers"/>
     </classes>
@@ -14,38 +14,44 @@
   
    Test For Spanish On Desktop Firefox
   <test name="TestBreyers_es_ff" preserve-order="true">
-    <parameter name="deviceName" value="desktop" />
-  	<parameter name="language" value="es" />
-  	<parameter name="Browser" value="ff" />
+    <parameter name="automationKit" value="selenium" />
+  	<parameter name="localeLanguage" value="es" />
+  	<parameter name="browserName" value="ff" />
     <classes>
       <class name="dweb.test.i18n.breyers.functionaltests.TestBreyers"/>
     </classes>
   </test> -->
   
   <!-- Test For Spanish On Mobile Nexus Emulator -->
- <!--  <test name="TestBreyers_es_Mobile_1" preserve-order="true">
-  	<parameter name="APPURL" value="https://secure.breyers.com" />
-  	<parameter name="appiumHub" value="http://0.0.0.0:4723/wd/hub" />
-  	<parameter name="language" value="es" />
-  	<parameter name="Browser" value="Mobile" />
-    <classes>
-      <class name="mweb.test.i18n.breyers.functionaltests.TestBreyers"/>
-    </classes>
-  </test>  -->
-  
-   <!-- Test For English On Mobile Nexus Emulator -->
-  <test name="TestBreyers_es_Mobile_Physical_LG Stylus 3" preserve-order="true">
-    <parameter name="deviceName" value="LG Stylus 3" />
+  <test name="TestBreyers_es_Mobile_Android Emulator" preserve-order="true">
+  	<parameter name="automationKit" value="appium" />
     <parameter name="appiumHub" value="http://0.0.0.0:4723/wd/hub" />
-    <parameter name="mobileAutomationName" value="UiAutomator2" />
-    <parameter name="mobilePlatformName" value="Android" />
-    <parameter name="mobilePlatformVersion" value="7.0" />
-    <parameter name="mobileDeviceName" value="LG Stylus 3" />    
-  	<parameter name="APPURL" value="https://secure.breyers.com" />  	
-  	<parameter name="language" value="us" />
-  	<parameter name="browser" value="Chrome" />
+    <parameter name="automationName" value="UiAutomator2" />
+    <parameter name="platformName" value="Android" />
+    <parameter name="platformVersion" value="8.1" />
+    <parameter name="deviceName" value="Android Emulator" /> 
+    <parameter name="avd" value="Nexus_5_API_27" />   
+  	<parameter name="appURL" value="https://secure.breyers.com" />  	
+  	<parameter name="localeLanguage" value="en" />
+  	<parameter name="browserName" value="Chrome" />
     <classes>
       <class name="mweb.test.i18n.breyers.functionaltests.TestBreyers"/>
     </classes>
   </test> 
+  
+   <!-- Test For English On Mobile Nexus Emulator -->
+  <!-- <test name="TestBreyers_en_Mobile_Physical_LG Stylus 3" preserve-order="true">
+    <parameter name="automationKit" value="appium" />
+    <parameter name="appiumHub" value="http://0.0.0.0:4723/wd/hub" />
+    <parameter name="automationName" value="UiAutomator2" />
+    <parameter name="platformName" value="Android" />
+    <parameter name="platformVersion" value="7.0" />
+    <parameter name="deviceName" value="LGM400GIVKVSTKIZE6" />    
+  	<parameter name="appURL" value="https://secure.breyers.com" />  	
+  	<parameter name="localeLanguage" value="en" />
+  	<parameter name="browserName" value="Chrome" />
+    <classes>
+      <class name="mweb.test.i18n.breyers.functionaltests.TestBreyers"/>
+    </classes>
+  </test>  -->
 </suite>

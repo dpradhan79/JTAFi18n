@@ -2,6 +2,7 @@ package com.testreport;
 
 import org.apache.log4j.Logger;
 
+import com.config.ITestParamsConstants;
 import com.testreport.ExtentReporter.ExtentTestVisibilityMode;
 import com.utilities.ReusableLibs;
 
@@ -35,11 +36,11 @@ public class ReportFactory {
 			{
 				case ExtentHtml :
 					
-					String htmlReportName = ReusableLibs.getConfigProperty("HtmlReport");
-					String screenShotLocation = ReusableLibs.getConfigProperty("ScreenshotLocation");		
-					String strBoolAppendExisting = ReusableLibs.getConfigProperty("boolAppendExisting");
-					String strIsCignitiLogoRequired = ReusableLibs.getConfigProperty("isCignitiLogoRequired");
-					String extentConfigFile = ReusableLibs.getConfigProperty("extentConfigFile");	
+					String htmlReportName = ReusableLibs.getConfigProperty(ITestParamsConstants.HTML_REPORT);
+					String screenShotLocation = ReusableLibs.getConfigProperty(ITestParamsConstants.SCREENSHOT_LOCATION);		
+					String strBoolAppendExisting = ReusableLibs.getConfigProperty(ITestParamsConstants.BOOL_APPEND_EXISTING);
+					String strIsCignitiLogoRequired = ReusableLibs.getConfigProperty(ITestParamsConstants.IS_CIGNITI_LOGO_REQD);
+					String extentConfigFile = ReusableLibs.getConfigProperty(ITestParamsConstants.EXTENT_CONFIG_FILE);	
 					boolean boolAppendExisting = false;
 					boolean boolIsCignitiLogoRequired = false;
 					if(strBoolAppendExisting !=null && strBoolAppendExisting.equalsIgnoreCase("true"))

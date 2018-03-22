@@ -18,6 +18,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import com.config.ITestParamsConstants;
 import com.testreport.IReporter;
 import com.utilities.ReusableLibs;
 
@@ -36,8 +37,8 @@ public abstract class PageTemplate {
 	protected PageTemplate(WebDriver webDriver, IReporter testReport) {
 		this.wd = webDriver;
 		this.testReport = testReport;
-		this.implicitWaitInSecs = Integer.parseInt(ReusableLibs.getConfigProperty("ImplicitWaitInSecs"));
-		this.pageLoadTimeOutInSecs = Integer.parseInt(ReusableLibs.getConfigProperty("PageLoadTimeOutInSecs"));
+		this.implicitWaitInSecs = Integer.parseInt(ReusableLibs.getConfigProperty(ITestParamsConstants.IMPLICIT_WAIT_IN_SECS));
+		this.pageLoadTimeOutInSecs = Integer.parseInt(ReusableLibs.getConfigProperty(ITestParamsConstants.PAGE_LOAD_TIME_OUT_IN_SECS));
 
 	}
 
@@ -351,8 +352,8 @@ public abstract class PageTemplate {
 	}
 
 	protected synchronized String getScreenShotName() {
-		String screenShotLocation = ReusableLibs.getConfigProperty("ScreenshotLocation");
-		String fileExtension = ReusableLibs.getConfigProperty("ScreenshotPictureFormat");
+		String screenShotLocation = ReusableLibs.getConfigProperty(ITestParamsConstants.SCREENSHOT_LOCATION);
+		String fileExtension = ReusableLibs.getConfigProperty(ITestParamsConstants.SCREENSHOT_PICTURE_FORMAT);
 		return ReusableLibs.getScreenshotFile(screenShotLocation, fileExtension);
 	}
 }

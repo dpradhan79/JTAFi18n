@@ -6,6 +6,8 @@ import java.util.Map;
 import org.testng.ITestContext;
 import org.testng.annotations.Test;
 
+import com.config.ITestParamsConstants;
+
 import dweb.aut.i18n.vaseline.interfaces.IVaselineUserOperations;
 import dweb.test.templates.TestTemplateMethodLevelInit;
 
@@ -15,7 +17,7 @@ public class TestProducts extends TestTemplateMethodLevelInit{
 	@Test	
 	public void validateNavigationAndMenus(ITestContext testContext) throws InterruptedException
 	{
-		String localeCountryCode = this.getTestParameter(testContext, "localeCountry");
+		String localeCountryCode = this.getTestParameter(testContext, ITestParamsConstants.LOCALE_COUNTRY);
 		String menuLinksCommaSeparated = this.getTestParameter(testContext, "Menus");		
 		String [] arrayMenuLinks = menuLinksCommaSeparated.split(",");
 		String [] arrayMenuItems = this.getTestParameter(testContext, "menuItems").split(",");
@@ -48,7 +50,7 @@ public class TestProducts extends TestTemplateMethodLevelInit{
 	@Test
 	public void validateReviews(ITestContext testContext) throws InterruptedException
 	{
-		String localeCountryCode = this.getTestParameter(testContext, "localeCountry");		
+		String localeCountryCode = this.getTestParameter(testContext, ITestParamsConstants.LOCALE_COUNTRY);		
 		String menuSelection = this.getTestParameter(testContext, "menuSelection");
 		String menuItemSelection = this.getTestParameter(testContext, "menuItemSelection");
 		String reviewItem =  this.getTestParameter(testContext, "reviewItem");
@@ -69,7 +71,7 @@ public class TestProducts extends TestTemplateMethodLevelInit{
 	@Test(dataProvider = "getDataFromExcel")
 	public void writeReview(Hashtable<String, String> data, ITestContext testContext) throws InterruptedException
 	{
-		String localeCountryCode = this.getTestParameter(testContext, "localeCountry");		
+		String localeCountryCode = this.getTestParameter(testContext, ITestParamsConstants.LOCALE_COUNTRY);		
 		String menuSelection = this.getTestParameter(testContext, "menuSelection");
 		String menuItemSelection = this.getTestParameter(testContext, "menuItemSelection");
 		String reviewItem =  this.getTestParameter(testContext, "reviewItem");

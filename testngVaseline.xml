@@ -8,10 +8,9 @@
   
    <!-- Test For Canada Region  On Chrome -->
   <test name="TestVaseline_CA_Chrome">
-  <parameter name="Browser" value="chrome" />
-  <parameter name="TestData" value="WebAutomationTestData_ca.xlsx" />
+  <parameter name="browserName" value="chrome" />  
   <parameter name="localeCountry" value="ca"></parameter>
-  <parameter name="APPURL" value="http://www.vaseline.ca/en"></parameter>
+  <parameter name="appURL" value="http://www.vaseline.ca/en"></parameter>
   <parameter name = "Menus" value = "PRODUCTS,THE VASELINE® STORY,SKIN HEALTH,THE HEALING PROJECT,LIP TINS" />
   <parameter name="expectedRating" value="4.8" />
   <parameter name="overallRating" value="Good"></parameter>
@@ -22,10 +21,9 @@
   
   <!-- Test For US Region  On Firefox -->
   <test name="TestVaseline_US_FF">
-  <parameter name="Browser" value="ff" />
-  <parameter name="TestData" value="WebAutomationTestData_us.xlsx" />
+  <parameter name="browserName" value="ff" /> 
   <parameter name="localeCountry" value="us" />
-  <parameter name="APPURL" value="http://www.vaseline.us/" />
+  <parameter name="appURL" value="http://www.vaseline.us/" />
   <parameter name = "Menus" value = "PRODUCTS,THE VASELINE® STORY,SKIN HEALTH,THE HEALING PROJECT,LIP TINS,WHAT" /> 
   <parameter name = "menuItems" value = "JELLY,INTENSIVE CARE™,LIP THERAPY®,MEN"/>
   <parameter name="expectedRating" value="4.81" />

@@ -24,6 +24,7 @@ public class AppiumDriverFactory {
 		this.appServiceFactory.buildAppiumDriverLocalService();
 		AppiumDriverLocalService appiumDriverLocalService = this.appServiceFactory.getAppiumDriverLocalService();
 		appiumDriverLocalService.start();
+		URL url = appiumDriverLocalService.getUrl();
 		AppiumDriver<MobileElement> appiumDriver = new AppiumDriver<MobileElement>(new URL (String.format("http://%s:%s/wd/hub", this.appServiceFactory.getIPAddress(), this.appServiceFactory.getPort())), this.appServiceFactory.getCapabilities());
 		return appiumDriver;
 
