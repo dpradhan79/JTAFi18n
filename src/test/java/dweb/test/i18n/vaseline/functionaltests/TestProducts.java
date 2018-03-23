@@ -9,10 +9,9 @@ import org.testng.annotations.Test;
 import com.config.ITestParamsConstants;
 
 import dweb.aut.i18n.vaseline.interfaces.IVaselineUserOperations;
-import dweb.test.templates.TestTemplateMethodLevelInit;
 
 @Test(groups = {"web"})
-public class TestProducts extends TestTemplateMethodLevelInit{
+public class TestProducts extends VaselineHelper{
 	
 	@Test	
 	public void validateNavigationAndMenus(ITestContext testContext) throws InterruptedException

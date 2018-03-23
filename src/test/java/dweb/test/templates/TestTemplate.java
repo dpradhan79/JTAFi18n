@@ -6,7 +6,6 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.collections.iterators.EntrySetMapIterator;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -15,7 +14,6 @@ import org.testng.annotations.DataProvider;
 
 import com.config.ITestParamsConstants;
 import com.excel.Xls_Reader;
-import com.gargoylesoftware.htmlunit.javascript.host.Set;
 import com.google.common.io.Resources;
 import com.testreport.IReporter;
 import com.utilities.ReusableLibs;
@@ -37,7 +35,7 @@ public abstract class TestTemplate {
 	protected static String implicitWaitInSecs = null;
 	protected static String pageLoadTimeOutInSecs = null;
 	public static ThreadLocal<WebDriver> threadLocalWebDriver = new ThreadLocal<WebDriver>();
-
+	
 	/**
 	 * get parameter from either test context or framework configuration file where
 	 * test context parameter overrides framework configuration parameter

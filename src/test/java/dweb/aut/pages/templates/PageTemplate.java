@@ -12,6 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -21,6 +22,11 @@ import org.testng.Assert;
 import com.config.ITestParamsConstants;
 import com.testreport.IReporter;
 import com.utilities.ReusableLibs;
+
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.PerformsTouchActions;
+import io.appium.java_client.TouchAction;
 
 /**
  * 
@@ -85,6 +91,7 @@ public abstract class PageTemplate {
 		try {
 			this.waitUntilElementIsClickable(byLocator);
 			this.wd.findElement(byLocator).click();
+			
 			LOG.info(String.format("Click Successful - (By - %s)", byLocator));
 			if (this.testReport != null) {
 				this.testReport.logSuccess("Click",

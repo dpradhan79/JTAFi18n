@@ -2,7 +2,6 @@ package dweb.test.templates;
 
 import java.lang.reflect.Method;
 import java.net.URISyntaxException;
-import java.util.Locale;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.TimeoutException;
@@ -17,8 +16,8 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.xml.XmlTest;
 
-import com.config.IConstants;
 import com.config.ITestParamsConstants;
+import com.factories.AppiumServiceFactory;
 import com.factories.WebDriverFactory;
 import com.testreport.ExtentReporter;
 import com.testreport.ExtentReporter.ExtentTestVisibilityMode;
@@ -26,11 +25,12 @@ import com.testreport.ReportFactory;
 import com.testreport.ReportFactory.ReportType;
 import com.utilities.ReusableLibs;
 
-import dweb.aut.i18n.vaseline.interfaces.IVaselineUserOperations;
-import dweb.aut.i18n.vaseline.regional.VaselineCanadaOperations;
-import dweb.aut.i18n.vaseline.regional.VaselineUSOperations;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.service.local.AppiumDriverLocalService;
 
 /**
  * Class with configuration for test execution
@@ -41,7 +41,7 @@ import io.appium.java_client.MobileElement;
 public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 
 	private static final Logger LOG = Logger.getLogger(TestTemplateMethodLevelInit.class);
-
+    private AppiumDriverLocalService appiumDriverLocalService = null;
 	/**
 	 * Configuration/Initialization before starting suite
 	 * 
@@ -82,6 +82,21 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 					.createTestNgXMLTestTag(String.format("%s", testContext.getCurrentXmlTest().getName()));
 
 		}
+		
+		//start appium server if automation is on mobile
+		if(this.getTestParameter(testContext, ITestParamsConstants.AUTOMATION_KIT).equalsIgnoreCase("appium"))
+		{
+			try
+			{
+				this.appiumDriverLocalService = new AppiumServiceFactory(this.getTestParameter(testContext, "appiumIPAddress"), this.convertTestParamsToCapabilities(testContext)).buildAppiumDriverLocalService();
+				this.appiumDriverLocalService.start();
+				LOG.info(String.format("Appium Server Started At URL - %s", this.appiumDriverLocalService.getUrl()));
+			}
+			catch(Exception ex)
+			{
+				LOG.error(ex);
+			}
+		}
 	}
 
 	/**
@@ -95,6 +110,12 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 		TestTemplate.testReport.updateTestCaseStatus();
 		if (threadLocalWebDriver.get() != null) {
 			threadLocalWebDriver.get().quit();
+		}
+		
+		//stop appium server, if running
+		if (this.appiumDriverLocalService !=null)
+		{
+			this.appiumDriverLocalService.stop();
 		}
 	}
 
@@ -113,8 +134,7 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 			LOG.info(String.format("Thread - %d , Executes Next Test Method - %s", Thread.currentThread().getId(),
 					m.getName()));
 
-			WebDriver webDriver = null;
-
+			WebDriver webDriver = null;			
 			if (TestTemplate.testReport instanceof ExtentReporter) {
 
 				if (((ExtentReporter) TestTemplate.testReport)
@@ -129,19 +149,26 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 
 			// Use APPURL if provided in Test Suite XML
 			String url = this.getTestParameter(testContext, ITestParamsConstants.APPURL);
-
-			// Use browser specific wd as provided in Test Suite XML or else use
-			// chromedriver
-			//String browser = this.getTestParameter(testContext, "Browser");
-			webDriver = WebDriverFactory.getWebDriver(this.getAllTestParameters(testContext));
+			
+			String automationKit = this.getTestParameter(testContext, ITestParamsConstants.AUTOMATION_KIT);
+						
+			if(automationKit.equalsIgnoreCase("selenium"))
+			{
+				webDriver = WebDriverFactory.getWebDriver(this.getAllTestParameters(testContext));		
+			}
+			else if(automationKit.equalsIgnoreCase("appium"))
+			{
+				webDriver = new AppiumDriver<MobileElement>(this.appiumDriverLocalService, this.convertTestParamsToCapabilities(testContext));
+			}
+			
 			try {
 				webDriver.get(url);
 			} catch (TimeoutException ex) {
 				LOG.error(String.format("Browser Takes More Time To Load, Time Out Defined - %s",
 						TestTemplate.pageLoadTimeOutInSecs));
 			}
-			threadLocalWebDriver.set(webDriver);
-
+			threadLocalWebDriver.set(webDriver);			
+			
 		} catch (Exception ex) {
 			LOG.error(String.format("Exception Encountered - %s", ex.getMessage()));
 			TestTemplate.testReport.logException(ex);
@@ -192,35 +219,5 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 			TestTemplate.testReport.updateTestCaseStatus();
 		}
 	}
-
-	protected IVaselineUserOperations getVaselineLocalizedOperations(String localeLanguageCode,
-			String localeCountryCode) {
-		IVaselineUserOperations countryVaseline = null;
-		Locale locale = new Locale(localeLanguageCode, localeCountryCode);
-		if (locale.equals(new Locale("en", "us"))) {
-			countryVaseline = new VaselineUSOperations(threadLocalWebDriver.get(), TestTemplate.testReport, locale,
-					IConstants.PAGE_ELEMENTS_BASEFILENAME);
-		} else if (locale.equals(new Locale("en", "ca"))) {
-			countryVaseline = new VaselineUSOperations(threadLocalWebDriver.get(), TestTemplate.testReport, locale,
-					IConstants.PAGE_ELEMENTS_BASEFILENAME);
-		}
-
-		return countryVaseline;
-	}
-
-	protected IVaselineUserOperations getVaselineLocalizedOperations(String localeCountryCode) {
-		IVaselineUserOperations countryVaseline = null;
-		String defaultLanguage = "en";
-		Locale locale = new Locale(defaultLanguage, localeCountryCode);
-		if (locale.equals(new Locale(defaultLanguage, "us"))) {
-			countryVaseline = new VaselineUSOperations(threadLocalWebDriver.get(), TestTemplate.testReport, locale,
-					IConstants.PAGE_ELEMENTS_BASEFILENAME);
-		} else if (locale.equals(new Locale(defaultLanguage, "ca"))) {
-			countryVaseline = new VaselineCanadaOperations(threadLocalWebDriver.get(), TestTemplate.testReport, locale,
-					IConstants.PAGE_ELEMENTS_BASEFILENAME);
-		}
-
-		return countryVaseline;
-	}
-
+	
 }

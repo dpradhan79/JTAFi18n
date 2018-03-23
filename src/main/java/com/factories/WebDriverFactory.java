@@ -19,32 +19,30 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.config.ITestParamsConstants;
 import com.google.common.io.Resources;
-import com.testreport.ReportFactory;
 import com.utilities.ReusableLibs;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 
 public class WebDriverFactory {
 		
 	private static final Logger LOG = Logger.getLogger(WebDriverFactory.class);
-	private WebDriverFactory() {}
+	private WebDriverFactory() {}	
 	
-	public static WebDriver getWebDriver(Map<String, String> dc) throws URISyntaxException, MalformedURLException
+	public static WebDriver getWebDriver(Map<String, String> dcMap) throws URISyntaxException, MalformedURLException
 	{
-		return getLocalWebDriver(dc);
+		return getLocalWebDriver(dcMap);
 						
 	}
 	
-	private static WebDriver getLocalWebDriver(Map<String, String> dc) throws MalformedURLException, URISyntaxException
+	private static WebDriver getLocalWebDriver(Map<String, String> capMap) throws MalformedURLException, URISyntaxException
 	{
 		WebDriver wd = null;
-		AppiumDriver<MobileElement> appiumDriver = null;
-		if(dc.get(ITestParamsConstants.AUTOMATION_KIT).equalsIgnoreCase("selenium"))
+		/*AppiumDriver<MobileElement> appiumDriver = null;*/
+		if(capMap.get(ITestParamsConstants.AUTOMATION_KIT).equalsIgnoreCase("selenium"))
 		{
-			switch(dc.get(ITestParamsConstants.BROWSER).toUpperCase())		
+			switch(capMap.get(ITestParamsConstants.BROWSER).toUpperCase())		
 			{
 			case "CHROME": 
 				String chromeDriverExe = ReusableLibs.getConfigProperty(ITestParamsConstants.CHROME_DRIVER_EXE);
@@ -86,22 +84,23 @@ public class WebDriverFactory {
 				break;
 			}
 		}
-		else if(dc.get(ITestParamsConstants.AUTOMATION_KIT).equalsIgnoreCase("appium"))
+		/*else if(capMap.get(ITestParamsConstants.AUTOMATION_KIT).equalsIgnoreCase("appium"))
 		{
 			DesiredCapabilities cap = new DesiredCapabilities();
-			cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, dc.get(ITestParamsConstants.APPIUM_AUTOMATION_NAME));
-			cap.setCapability(MobileCapabilityType.PLATFORM_NAME, dc.get(ITestParamsConstants.APPIUM_PLATFORM_NAME));
-			cap.setCapability(MobileCapabilityType.PLATFORM_VERSION, dc.get(ITestParamsConstants.APPIUM_PLATFORM_VERSION));			
-			cap.setCapability(MobileCapabilityType.DEVICE_NAME, dc.get(ITestParamsConstants.APPIUM_DEVICE_NAME));
-			if(dc.get(ITestParamsConstants.APPIUM_AVD) != null && (!dc.get(ITestParamsConstants.APPIUM_AVD).isEmpty()))
+			cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, capMap.get(ITestParamsConstants.APPIUM_AUTOMATION_NAME));
+			cap.setCapability(MobileCapabilityType.PLATFORM_NAME, capMap.get(ITestParamsConstants.APPIUM_PLATFORM_NAME));
+			cap.setCapability(MobileCapabilityType.PLATFORM_VERSION, capMap.get(ITestParamsConstants.APPIUM_PLATFORM_VERSION));			
+			cap.setCapability(MobileCapabilityType.DEVICE_NAME, capMap.get(ITestParamsConstants.APPIUM_DEVICE_NAME));
+			if(capMap.get(ITestParamsConstants.APPIUM_AVD) != null && (!capMap.get(ITestParamsConstants.APPIUM_AVD).isEmpty()))
 			{
-				cap.setCapability("avd", dc.get(ITestParamsConstants.APPIUM_AVD));
+				cap.setCapability("avd", capMap.get(ITestParamsConstants.APPIUM_AVD));
 			}
-			cap.setCapability(MobileCapabilityType.BROWSER_NAME, dc.get(ITestParamsConstants.BROWSER));
-			String appiumHub = dc.get(ITestParamsConstants.APPIUM_HUB);			
+			cap.setCapability(MobileCapabilityType.BROWSER_NAME, capMap.get(ITestParamsConstants.BROWSER));
+			String appiumHub = capMap.get(ITestParamsConstants.APPIUM_HUB);			
 			appiumDriver = new AppiumDriver<MobileElement>(new URL(appiumHub), cap);
 			wd = appiumDriver;	
-		}	
+			
+		}	*/
 			
 		wd.manage().timeouts().implicitlyWait(Integer.parseInt(ReusableLibs.getConfigProperty(ITestParamsConstants.IMPLICIT_WAIT_IN_SECS)),
 				TimeUnit.SECONDS);
