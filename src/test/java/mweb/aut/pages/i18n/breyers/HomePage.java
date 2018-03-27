@@ -23,8 +23,14 @@ public class HomePage extends dweb.aut.pages.i18n.breyers.HomePage {
 	{
 		for(String menuKey : this.arrayMenuKeys)
 		{
-			this.click(By.xpath("//button[@data-ct-action='Drawer Menu']"));
-			this.clickMenu(menuKey);
+			String menuValue =  this.getLocalizedValue(menuKey);
+			if(!this.isElementVisible(By.xpath(String.format(this.byMenu, menuValue))))
+			{
+				this.click(By.xpath("//button[@data-ct-action='Drawer Menu']"));
+			}
+			
+			this.clickMenu(menuKey);	
+			
 		}
 	}
 

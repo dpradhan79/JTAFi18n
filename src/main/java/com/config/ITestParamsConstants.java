@@ -37,6 +37,9 @@ public interface ITestParamsConstants {
 	String APPIUM_PLATFORM_NAME = MobileCapabilityType.PLATFORM_NAME;
 	String APPIUM_PLATFORM_VERSION = MobileCapabilityType.PLATFORM_VERSION;
 	String APPIUM_DEVICE_NAME = MobileCapabilityType.DEVICE_NAME;
+	String APPIUM_NORESET = "noReset";
+	String APPIUM_DEVICE_READY_TIMEOUT = "deviceReadyTimeout";
+	String APPIUM_AVD_READY_TIMEOUT = "avdReadyTimeout";
 	String APPIUM_NODEJS_EXECUTABLE_LOCATION = "nodeJSLocation";
 	String APPIUM_EXECUTABLE_JS_FILE = "appiumExecutableJS";
 	

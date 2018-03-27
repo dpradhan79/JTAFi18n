@@ -333,6 +333,24 @@ public abstract class PageTemplate {
 
 		return isSuccess;
 	}
+	
+	protected boolean isElementVisible(By byLocator) {
+		boolean isSuccess = false;
+		try {
+			// validate element is displayed or not
+			implicitwait(2);
+			Assert.assertEquals(wd.findElement(byLocator).isDisplayed(), true);
+			LOG.info(String.format("Element Present - (By - %s)", byLocator));
+			this.testReport.logSuccess("isElementVisible", String.format("Element Present - (By - %s)", byLocator));
+			isSuccess = true;
+		} catch (Exception | AssertionError ex) {
+			isSuccess = false;
+			LOG.info(String.format("Element Not Prensent - (By - %s)", byLocator));
+			this.testReport.logInfo(String.format("Element Not Prensent - (By - %s)", byLocator));
+		}
+
+		return isSuccess;
+	}
 
 	protected void implicitwait(int sec) {
 		try {
