@@ -40,7 +40,7 @@ public class AppiumServiceFactory {
 	
 	public AppiumServiceFactory(String IPAddress, DesiredCapabilities cap) {
 		this(IPAddress);
-		this.cap = cap;
+		this.setCapabilities(cap);
 	}
 
 	public void setIPAddress(String IPAddress) {
@@ -61,6 +61,10 @@ public class AppiumServiceFactory {
 
 	public void setCapabilities(DesiredCapabilities cap) {
 		this.cap = cap;
+		if(this.cap.getCapability(ITestParamsConstants.APPIUM_PORT)!= null)
+		{
+			this.port = Integer.parseInt((String)this.cap.getCapability(ITestParamsConstants.APPIUM_PORT));
+		}
 	}
 
 	public DesiredCapabilities getCapabilities() {

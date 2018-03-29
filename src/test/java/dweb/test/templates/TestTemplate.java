@@ -12,6 +12,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.ITestContext;
 import org.testng.annotations.DataProvider;
 
+import com.config.IConstants;
 import com.config.ITestParamsConstants;
 import com.excel.Xls_Reader;
 import com.google.common.io.Resources;
@@ -113,10 +114,19 @@ public abstract class TestTemplate {
 	 */
 	@DataProvider(name = "getDataFromExcel", parallel = true)
 	protected Object[][] getDataFromExcel() throws URISyntaxException {
-		URL urlFilePath = Resources.getResource("testdata/WebAutomationTestData.xlsx");
+		URL urlFilePath = Resources.getResource(String.format("%s/%s", IConstants.TEST_DATA_LOCATION, IConstants.TEST_DATA_EXCEL_FILE));
 		String filePath = Paths.get(urlFilePath.toURI()).toFile().getAbsolutePath();
 		Xls_Reader xlsReader = new Xls_Reader(filePath);
 		Object[][] objMetrics = TestUtil.getData("WriteReview", xlsReader, "ProductItemReview");
+		return objMetrics;
+	}
+	
+	@DataProvider(name = "getUrlsFromExcel", parallel = true)
+	protected Object[][] getUrlsFromExcel() throws URISyntaxException {
+		URL urlFilePath = Resources.getResource(String.format("%s/%s", IConstants.TEST_DATA_LOCATION, IConstants.TEST_DATA_EXCEL_FILE));
+		String filePath = Paths.get(urlFilePath.toURI()).toFile().getAbsolutePath();
+		Xls_Reader xlsReader = new Xls_Reader(filePath);
+		Object[][] objMetrics = TestUtil.getData("TestBrokenLinks", xlsReader, "URLList");
 		return objMetrics;
 	}
 
@@ -134,5 +144,7 @@ public abstract class TestTemplate {
 			return screenShotName;
 		}
 	}
+	
+	
 
 }

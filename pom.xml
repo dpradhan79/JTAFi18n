@@ -96,6 +96,8 @@
 					<suiteXmlFiles>
 						<suiteXmlFile>testngBreyers.xml</suiteXmlFile>
 						<suiteXmlFile>testngVaseline.xml</suiteXmlFile>
+						<suiteXmlFile>testngBreyers_Mobile.xml</suiteXmlFile>
+						<suiteXmlFile>testngBrokenLink.xml</suiteXmlFile>
 					</suiteXmlFiles>
 				</configuration>
 			</plugin>

@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -43,8 +44,10 @@ public abstract class PageTemplate {
 	protected PageTemplate(WebDriver webDriver, IReporter testReport) {
 		this.wd = webDriver;
 		this.testReport = testReport;
-		this.implicitWaitInSecs = Integer.parseInt(ReusableLibs.getConfigProperty(ITestParamsConstants.IMPLICIT_WAIT_IN_SECS));
-		this.pageLoadTimeOutInSecs = Integer.parseInt(ReusableLibs.getConfigProperty(ITestParamsConstants.PAGE_LOAD_TIME_OUT_IN_SECS));
+		this.implicitWaitInSecs = Integer
+				.parseInt(ReusableLibs.getConfigProperty(ITestParamsConstants.IMPLICIT_WAIT_IN_SECS));
+		this.pageLoadTimeOutInSecs = Integer
+				.parseInt(ReusableLibs.getConfigProperty(ITestParamsConstants.PAGE_LOAD_TIME_OUT_IN_SECS));
 
 	}
 
@@ -65,6 +68,25 @@ public abstract class PageTemplate {
 
 		}
 
+	}
+
+	protected void sendKeysWithJavascript(By byLocator, String text) {
+		try {
+			this.waitUntilElementIsClickable(byLocator);
+			((JavascriptExecutor) this.wd).executeScript("arguments[0].setAttribute(arguments[1], arguments[2])",
+					this.wd.findElement(byLocator), "value", text);
+			LOG.info(String.format("sendKeysWithJavascript Successful - (By - %s, text - %s)", byLocator, text));
+			this.testReport.logSuccess("sendKeysWithJavascript",
+					String.format("Entered Text - <mark>%s</mark> To Locator - <mark>%s</mark>", text, byLocator));
+
+		} catch (Exception ex) {
+			LOG.error(String.format("Exception Encountered - %s", ex.getMessage()));
+			this.testReport.logFailure("sendKeysWithJavascript", String
+					.format("Failed To Enter Text - <mark>%s</mark> To Locator - <mark>%s</mark>", text, byLocator),
+					this.getScreenShotName());
+			this.testReport.logException(ex);
+
+		}
 	}
 
 	protected void moveToElement(By byLocator) {
@@ -91,7 +113,7 @@ public abstract class PageTemplate {
 		try {
 			this.waitUntilElementIsClickable(byLocator);
 			this.wd.findElement(byLocator).click();
-			
+
 			LOG.info(String.format("Click Successful - (By - %s)", byLocator));
 			if (this.testReport != null) {
 				this.testReport.logSuccess("Click",
@@ -109,6 +131,24 @@ public abstract class PageTemplate {
 
 		}
 
+	}
+
+	protected void clickWithJavascript(By byLocator) {
+		try {
+			this.waitUntilElementIsClickable(byLocator);
+			((JavascriptExecutor) this.wd).executeScript("arguments[0].click();", this.wd.findElement(byLocator));
+			
+
+		} catch (Exception ex) {
+			LOG.error(String.format("Exception Encountered - %s", ex.getMessage()));
+			if (this.testReport != null) {
+				this.testReport.logFailure("clickWithJavascript",
+						String.format("Failed To Perform Click On Locator - <mark>%s</mark>", byLocator),
+						this.getScreenShotName());
+				this.testReport.logException(ex);
+			}
+
+		}
 	}
 
 	protected void SelectDropDownByText(By byLocator, String visibleText) {
@@ -333,7 +373,7 @@ public abstract class PageTemplate {
 
 		return isSuccess;
 	}
-	
+
 	protected boolean isElementVisible(By byLocator) {
 		boolean isSuccess = false;
 		try {

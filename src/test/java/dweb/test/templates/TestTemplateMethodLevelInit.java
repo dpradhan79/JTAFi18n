@@ -16,6 +16,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.xml.XmlTest;
 
+import com.config.IConstants;
 import com.config.ITestParamsConstants;
 import com.factories.AppiumServiceFactory;
 import com.factories.WebDriverFactory;
@@ -41,7 +42,8 @@ import io.appium.java_client.service.local.AppiumDriverLocalService;
 public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 
 	private static final Logger LOG = Logger.getLogger(TestTemplateMethodLevelInit.class);
-    private AppiumDriverLocalService appiumDriverLocalService = null;
+	private AppiumDriverLocalService appiumDriverLocalService = null;
+
 	/**
 	 * Configuration/Initialization before starting suite
 	 * 
@@ -54,8 +56,10 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 
 		LOG.info(String.format("Suite To Be Executed Next -  %s", testContext.getSuite().getName()));
 		TestTemplate.implicitWaitInSecs = ReusableLibs.getConfigProperty(ITestParamsConstants.IMPLICIT_WAIT_IN_SECS);
-		TestTemplate.pageLoadTimeOutInSecs = ReusableLibs.getConfigProperty(ITestParamsConstants.PAGE_LOAD_TIME_OUT_IN_SECS);
-		String extentTestVisibilityMode = ReusableLibs.getConfigProperty(ITestParamsConstants.EXTENT_TEST_VISIBILITY_MODE);
+		TestTemplate.pageLoadTimeOutInSecs = ReusableLibs
+				.getConfigProperty(ITestParamsConstants.PAGE_LOAD_TIME_OUT_IN_SECS);
+		String extentTestVisibilityMode = ReusableLibs
+				.getConfigProperty(ITestParamsConstants.EXTENT_TEST_VISIBILITY_MODE);
 
 		TestTemplate.testReport = ReportFactory.getInstance(ReportType.ExtentHtml,
 				ExtentTestVisibilityMode.valueOf(extentTestVisibilityMode));
@@ -83,19 +87,27 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 
 		}
 		
-		//start appium server if automation is on mobile
-		if(this.getTestParameter(testContext, ITestParamsConstants.AUTOMATION_KIT).equalsIgnoreCase("appium"))
-		{
-			try
-			{
-				this.appiumDriverLocalService = new AppiumServiceFactory(this.getTestParameter(testContext, "appiumIPAddress"), this.convertTestParamsToCapabilities(testContext)).buildAppiumDriverLocalService();
-				this.appiumDriverLocalService.start();
-				LOG.info(String.format("Appium Server Started At URL - %s", this.appiumDriverLocalService.getUrl()));
+		int currentAttempt = 1;
+		boolean isServerStarted = false;
+		while (currentAttempt <= IConstants.APPIUM_START_MAX_ATTEMPT && isServerStarted == false) {
+			LOG.info(String.format("Thread - %d, Attempts To Start Appium Server For %d time",
+					Thread.currentThread().getId(), currentAttempt));
+			// start appium server if automation is on mobile
+			if (this.getTestParameter(testContext, ITestParamsConstants.AUTOMATION_KIT).equalsIgnoreCase("appium")) {
+				try {
+					this.appiumDriverLocalService = new AppiumServiceFactory(
+							this.getTestParameter(testContext, "appiumIPAddress"),
+							this.convertTestParamsToCapabilities(testContext)).buildAppiumDriverLocalService();
+					this.appiumDriverLocalService.start();
+					isServerStarted = true;					
+					LOG.info(
+							String.format("Appium Server Started At URL - %s", this.appiumDriverLocalService.getUrl()));
+				} catch (Exception ex) {
+					LOG.error(ex);
+
+				}
 			}
-			catch(Exception ex)
-			{
-				LOG.error(ex);
-			}
+			currentAttempt++;
 		}
 	}
 
@@ -111,10 +123,9 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 		if (threadLocalWebDriver.get() != null) {
 			threadLocalWebDriver.get().quit();
 		}
-		
-		//stop appium server, if running
-		if (this.appiumDriverLocalService !=null)
-		{
+
+		// stop appium server, if running
+		if (this.appiumDriverLocalService != null) {
 			this.appiumDriverLocalService.stop();
 		}
 	}
@@ -134,7 +145,7 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 			LOG.info(String.format("Thread - %d , Executes Next Test Method - %s", Thread.currentThread().getId(),
 					m.getName()));
 
-			WebDriver webDriver = null;			
+			WebDriver webDriver = null;
 			if (TestTemplate.testReport instanceof ExtentReporter) {
 
 				if (((ExtentReporter) TestTemplate.testReport)
@@ -149,26 +160,39 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 
 			// Use APPURL if provided in Test Suite XML
 			String url = this.getTestParameter(testContext, ITestParamsConstants.APPURL);
-			
+
 			String automationKit = this.getTestParameter(testContext, ITestParamsConstants.AUTOMATION_KIT);
-						
-			if(automationKit.equalsIgnoreCase("selenium"))
-			{
-				webDriver = WebDriverFactory.getWebDriver(this.getAllTestParameters(testContext));		
+
+			if (automationKit.equalsIgnoreCase("selenium")) {
+				webDriver = WebDriverFactory.getWebDriver(this.getAllTestParameters(testContext));
+			} else if (automationKit.equalsIgnoreCase("appium")) {				
+				int currentAttempt = 1;
+				boolean isAppiumDriverInitSuccessful = false;
+				while (currentAttempt <= IConstants.APPIUM_START_MAX_ATTEMPT && isAppiumDriverInitSuccessful == false) {
+					LOG.info(String.format("Thread - %d, Attempts To Initialize Appium For %d time",
+							Thread.currentThread().getId(), currentAttempt));
+					try {
+						webDriver = new AppiumDriver<MobileElement>(this.appiumDriverLocalService,
+								this.convertTestParamsToCapabilities(testContext));
+						isAppiumDriverInitSuccessful = true;
+						LOG.info(String.format("Thread - %d, Succeeds To Initialize Appium In %d Attempt",
+								Thread.currentThread().getId(), currentAttempt));
+					} catch (Exception ex) {
+						LOG.error(String.format("Thread - %d Encounters Exception - %s", Thread.currentThread().getId(), ex.getMessage()));
+						Thread.sleep(1000);
+					}
+					currentAttempt ++;
+				}
 			}
-			else if(automationKit.equalsIgnoreCase("appium"))
-			{
-				webDriver = new AppiumDriver<MobileElement>(this.appiumDriverLocalService, this.convertTestParamsToCapabilities(testContext));
-			}
-			
+
 			try {
 				webDriver.get(url);
 			} catch (TimeoutException ex) {
 				LOG.error(String.format("Browser Takes More Time To Load, Time Out Defined - %s",
 						TestTemplate.pageLoadTimeOutInSecs));
 			}
-			threadLocalWebDriver.set(webDriver);			
-			
+			threadLocalWebDriver.set(webDriver);
+
 		} catch (Exception ex) {
 			LOG.error(String.format("Exception Encountered - %s", ex.getMessage()));
 			TestTemplate.testReport.logException(ex);
@@ -194,9 +218,9 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 	protected void afterMethod(ITestContext testContext, ITestResult testResult, Method m) throws Exception {
 		LOG.info(String.format("Thread - %d , Completes Executing Test Method - %s", Thread.currentThread().getId(),
 				m.getName()));
-		TestTemplate.testReport
-				.logInfo(String.format("Thread - %d , Completes Executing Test Method - %s On Browser - %s",
-						Thread.currentThread().getId(), m.getName(), this.getTestParameter(testContext, ITestParamsConstants.BROWSER)));
+		TestTemplate.testReport.logInfo(String.format(
+				"Thread - %d , Completes Executing Test Method - %s On Browser - %s", Thread.currentThread().getId(),
+				m.getName(), this.getTestParameter(testContext, ITestParamsConstants.BROWSER)));
 
 		try {
 			threadLocalWebDriver.get().close();
@@ -219,5 +243,5 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 			TestTemplate.testReport.updateTestCaseStatus();
 		}
 	}
-	
+
 }

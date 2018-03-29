@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SuiteTestBreyers" parallel="tests">   
+  <!-- Test For Spanish On Mobile Nexus Emulator -->
+  <test name="TestBreyers_es_Mobile_Android Emulator_1" preserve-order="true">
+  	<parameter name="automationKit" value="appium" />    
+    <parameter name="automationName" value="UiAutomator2" />
+    <parameter name="platformName" value="Android" />
+    <parameter name="platformVersion" value="8.1" />
+    <parameter name="deviceName" value="Android emulator" /> 
+    <parameter name="avd" value="Nexus_5_API_27" />  
+    <parameter name="avdReadyTimeout" value="300000" />        
+  	<parameter name="appURL" value="https://secure.breyers.com" />  	
+  	<parameter name="localeLanguage" value="en" />
+  	<parameter name="browserName" value="Chrome" />
+    <classes>
+      <class name="mweb.test.i18n.breyers.functionaltests.TestBreyers"/>
+    </classes>
+  </test> 
+  
+   <!-- Test For Spanish On Mobile Tablet Emulator -->
+  <test name="TestBreyers_en_Mobile_Android Emulator_Tablet" preserve-order="true">
+  	<parameter name="automationKit" value="appium" />    
+    <parameter name="automationName" value="UiAutomator2" />
+    <parameter name="platformName" value="Android" />
+    <parameter name="platformVersion" value="8.1" />
+    <parameter name="deviceName" value="Android emulator" /> 
+    <parameter name="avd" value="10.1_WXGA_Tablet_API_27" />   
+    <parameter name="avdReadyTimeout" value="300000" />   
+  	<parameter name="appURL" value="https://secure.breyers.com" />  	
+  	<parameter name="localeLanguage" value="es" />
+  	<parameter name="browserName" value="Chrome" />
+    <classes>
+      <class name="mweb.test.i18n.breyers.functionaltests.TestBreyers"/>
+    </classes>
+  </test> 
+  
+   <!-- Test For English On Pysical Mobile LG Stylus 3 -->
+  <!-- <test name="TestBreyers_en_Mobile_Physical_LG Stylus 3" preserve-order="true">
+    <parameter name="automationKit" value="appium" />    
+    <parameter name="automationName" value="UiAutomator2" />
+    <parameter name="platformName" value="Android" />
+    <parameter name="platformVersion" value="7.0" />
+    <parameter name="deviceName" value="LGM400GIVKVSTKIZE6" /> 
+    <parameter name="deviceReadyTimeout" value="120000" /> 
+  	<parameter name="appURL" value="https://secure.breyers.com" />  	
+  	<parameter name="localeLanguage" value="es" />
+  	<parameter name="browserName" value="Chrome" />
+    <classes>
+      <class name="mweb.test.i18n.breyers.functionaltests.TestBreyers"/>
+    </classes>
+  </test> --> 
+</suite>

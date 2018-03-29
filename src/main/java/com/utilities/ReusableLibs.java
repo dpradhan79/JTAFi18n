@@ -2,7 +2,12 @@ package com.utilities;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -11,6 +16,9 @@ import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
+import javax.net.ssl.HttpsURLConnection;
+
+import org.apache.http.HttpResponse;
 import org.testng.log4testng.Logger;
 
 import com.config.IConstants;
@@ -245,4 +253,14 @@ public class ReusableLibs
 		fileName = strScreenshotFileName;
 		return fileName;
 	}
+    
+    public static int getResponseCode(String url) throws MalformedURLException, IOException
+    {
+    	HttpURLConnection httpUrlConn = (HttpURLConnection) new URL(url).openConnection();
+    	httpUrlConn.setRequestMethod("HEAD");          
+    	httpUrlConn.connect();          
+        int respCode = httpUrlConn.getResponseCode(); 
+        return respCode;
+        
+    }
 }

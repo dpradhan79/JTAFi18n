@@ -14,7 +14,7 @@ public interface IConstants
 	String AUT_CONFIG_FILE = "DesktopWebUI.properties";
 	String PAGE_ELEMENTS_LOCATION = "page_elements";
 	String PAGE_ELEMENTS_BASEFILENAME = "page_elements.DesktopWebUI";
-	
+	int APPIUM_START_MAX_ATTEMPT = 10;
 
     
 }

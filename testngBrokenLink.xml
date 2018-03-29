@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SuiteTestBreyers" parallel="tests" thread-count="10" preserve-order="true">
+  <parameter name="appURL" value="https://secure.breyers.com/contactus" />  
+  <!-- Test For Broken Links -->
+  <test name="TestBreyers_brokenLinks" preserve-order="true">
+  <parameter name="automationKit" value="selenium" />  
+  <parameter name="browserName" value="Chrome" />
+     <classes>     
+      <class name="dweb.test.i18n.breyers.functionaltests.TestBrokenLinks"/>
+    </classes>
+  </test> 
+</suite>

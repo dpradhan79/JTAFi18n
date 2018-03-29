@@ -17,6 +17,7 @@ public class ContactUsPage extends PageTemplateI18NSupport {
 	
 	public void selectInquiryType()
 	{
+		this.testReport.logInfo("Contact Us Page", this.getScreenShotName());
 		String inquiryType = this.getLocalizedValue("inquiryTypeItem");		
 		this.SelectDropDownByText(By.id("idInquiryType"), inquiryType);
 		

@@ -10,20 +10,19 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
+import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 
 import com.config.ITestParamsConstants;
 import com.google.common.io.Resources;
 import com.utilities.ReusableLibs;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.remote.MobileCapabilityType;
 
 public class WebDriverFactory {
 		
@@ -60,7 +59,8 @@ public class WebDriverFactory {
 				options.setExperimentalOption("prefs", prefs);
 				/* Chrome settings Done */
 	
-				wd = new ChromeDriver(options);			
+				wd = new ChromeDriver(options);		
+				LOG.info(String.format("Driver Initialized For Browser - %s", "Chrome"));
 				break;
 				
 			case "FF":
@@ -71,6 +71,7 @@ public class WebDriverFactory {
 				String ffdriverPath = Paths.get(urlFilePath.toURI()).toFile().getAbsolutePath();
 				System.setProperty("webdriver.gecko.driver", ffdriverPath);			
 				wd = new FirefoxDriver();
+				LOG.info(String.format("Driver Initialized For Browser - %s", "Firefox"));
 				break;
 				
 			case "IE":			
@@ -80,7 +81,18 @@ public class WebDriverFactory {
 						.getResource(String.format("%s%s%s", "drivers", File.separatorChar, ieDriverExe));
 				String iedriverPath = Paths.get(urlFilePath.toURI()).toFile().getAbsolutePath();
 				System.setProperty("webdriver.ie.driver", iedriverPath);	
-				wd = new InternetExplorerDriver();
+				InternetExplorerOptions ieOptions = new InternetExplorerOptions();
+				ieOptions.enableNativeEvents();
+				ieOptions.takeFullPageScreenshot();
+				ieOptions.requireWindowFocus();
+				ieOptions.introduceFlakinessByIgnoringSecurityDomains();				
+				ieOptions.enablePersistentHovering();
+				ieOptions.ignoreZoomSettings();
+				ieOptions.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
+				ieOptions.destructivelyEnsureCleanSession();
+				ieOptions.setCapability("disable-popup-blocking", true);
+				wd = new InternetExplorerDriver(ieOptions);
+				LOG.info(String.format("Driver Initialized For Browser - %s", "IE"));
 				break;
 			}
 		}
