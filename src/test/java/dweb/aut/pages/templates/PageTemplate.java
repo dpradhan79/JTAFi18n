@@ -54,10 +54,19 @@ public abstract class PageTemplate {
 	protected void sendKeys(By byLocator, String text) {
 		try {
 			this.waitUntilElementIsClickable(byLocator);
-			this.wd.findElement(byLocator).sendKeys(text);
-			LOG.info(String.format("SendKeys Successful - (By - %s, text - %s)", byLocator, text));
-			this.testReport.logSuccess("SendKeys",
-					String.format("Entered Text - <mark>%s</mark> To Locator - <mark>%s</mark>", text, byLocator));
+			try {
+				this.wd.findElement(byLocator).sendKeys(text);
+				LOG.info(String.format("SendKeys Successful - (By - %s, text - %s)", byLocator, text));
+				this.testReport.logSuccess("SendKeys",
+						String.format("Entered Text - <mark>%s</mark> To Locator - <mark>%s</mark>", text, byLocator));
+			} catch (Exception ex) {
+				this.sendKeysWithJavascript(byLocator, text);
+			}
+			if (this.getAttribute(byLocator, "value").equalsIgnoreCase(text)) {
+				LOG.info(String.format("SendKeys Successful - (By - %s, text - %s)", byLocator, text));
+				this.testReport.logSuccess("SendKeys",
+						String.format("Entered Text - <mark>%s</mark> To Locator - <mark>%s</mark>", text, byLocator));
+			}
 
 		} catch (Exception ex) {
 			LOG.error(String.format("Exception Encountered - %s", ex.getMessage()));
@@ -73,18 +82,20 @@ public abstract class PageTemplate {
 	protected void sendKeysWithJavascript(By byLocator, String text) {
 		try {
 			this.waitUntilElementIsClickable(byLocator);
-			((JavascriptExecutor) this.wd).executeScript("arguments[0].setAttribute(arguments[1], arguments[2])",
+			((JavascriptExecutor) this.wd).executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);",
 					this.wd.findElement(byLocator), "value", text);
 			LOG.info(String.format("sendKeysWithJavascript Successful - (By - %s, text - %s)", byLocator, text));
 			this.testReport.logSuccess("sendKeysWithJavascript",
 					String.format("Entered Text - <mark>%s</mark> To Locator - <mark>%s</mark>", text, byLocator));
 
 		} catch (Exception ex) {
-			LOG.error(String.format("Exception Encountered - %s", ex.getMessage()));
-			this.testReport.logFailure("sendKeysWithJavascript", String
-					.format("Failed To Enter Text - <mark>%s</mark> To Locator - <mark>%s</mark>", text, byLocator),
-					this.getScreenShotName());
-			this.testReport.logException(ex);
+			if (!this.getAttribute(byLocator, "value").equalsIgnoreCase(text)) {
+				LOG.error(String.format("Exception Encountered - %s", ex.getMessage()));
+				this.testReport.logFailure("sendKeysWithJavascript", String
+						.format("Failed To Enter Text - <mark>%s</mark> To Locator - <mark>%s</mark>", text, byLocator),
+						this.getScreenShotName());
+				this.testReport.logException(ex);
+			}
 
 		}
 	}
@@ -137,7 +148,6 @@ public abstract class PageTemplate {
 		try {
 			this.waitUntilElementIsClickable(byLocator);
 			((JavascriptExecutor) this.wd).executeScript("arguments[0].click();", this.wd.findElement(byLocator));
-			
 
 		} catch (Exception ex) {
 			LOG.error(String.format("Exception Encountered - %s", ex.getMessage()));

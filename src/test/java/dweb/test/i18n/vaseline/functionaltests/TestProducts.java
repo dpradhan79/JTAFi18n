@@ -13,7 +13,7 @@ import dweb.aut.i18n.vaseline.interfaces.IVaselineUserOperations;
 @Test(groups = {"web"})
 public class TestProducts extends VaselineHelper{
 	
-	@Test	
+	@Test (enabled = true)
 	public void validateNavigationAndMenus(ITestContext testContext) throws InterruptedException
 	{
 		String localeCountryCode = this.getTestParameter(testContext, ITestParamsConstants.LOCALE_COUNTRY);
@@ -46,7 +46,7 @@ public class TestProducts extends VaselineHelper{
 		
 	}
 	
-	@Test
+	@Test(enabled = true)
 	public void validateReviews(ITestContext testContext) throws InterruptedException
 	{
 		String localeCountryCode = this.getTestParameter(testContext, ITestParamsConstants.LOCALE_COUNTRY);		
@@ -59,15 +59,15 @@ public class TestProducts extends VaselineHelper{
 		IVaselineUserOperations vCountry = getVaselineLocalizedOperations(localeCountryCode);
 		//select Menu
 		vCountry.selectMenu(menuSelection);
-		Thread.sleep(5000);
+		Thread.sleep(10000);
 		//Select Product Item
 		vCountry.selectMenuProduct(menuItemSelection);
-		Thread.sleep(5000);
+		Thread.sleep(10000);
 		//review
 		vCountry.readReview(reviewItem, Float.parseFloat(expectedRating));
 	}
 	
-	@Test(dataProvider = "getDataFromExcel")
+	@Test(dataProvider = "getDataFromExcel", enabled = true)
 	public void writeReview(Hashtable<String, String> data, ITestContext testContext) throws InterruptedException
 	{
 		String localeCountryCode = this.getTestParameter(testContext, ITestParamsConstants.LOCALE_COUNTRY);		

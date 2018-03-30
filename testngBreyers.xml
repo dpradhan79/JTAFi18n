@@ -13,13 +13,13 @@
   </test>
   
   <!--  Test For Spanish On Desktop Firefox -->
-  <test name="TestBreyers_es_ff" preserve-order="true">
+ <!--  <test name="TestBreyers_es_ff" preserve-order="true">
     <parameter name="automationKit" value="selenium" />
   	<parameter name="localeLanguage" value="es" />
   	<parameter name="browserName" value="ff" />
     <classes>
       <class name="dweb.test.i18n.breyers.functionaltests.TestBreyers"/>
     </classes>
-  </test> 
+  </test> --> 
  
 </suite>

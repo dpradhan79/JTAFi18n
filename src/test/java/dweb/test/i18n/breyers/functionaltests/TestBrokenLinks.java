@@ -43,7 +43,14 @@ public class TestBrokenLinks extends TestTemplateMethodLevelInit {
 		
 		String link = data.get("URL");
 		LOG.info(String.format("URL Selected To Find Links - %s", link));
+		try
+		{
 		TestTemplate.threadLocalWebDriver.get().get(link);
+		}
+		catch(Exception ex)
+		{
+			LOG.info(String.format("Exception Encountered While Redirecting To URL - %s, Exception - %s", link, ex.getMessage()));
+		}
 		
 		List<WebElement> listLinks = TestTemplate.threadLocalWebDriver.get().findElements(By.tagName("a"));
 		for(WebElement weLink : listLinks)

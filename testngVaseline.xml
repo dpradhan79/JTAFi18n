@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="TestVaselineRegressionSuite" parallel = "tests" thread-count="5">
+  <parameter name="automationKit" value="selenium" />
   <parameter name = "menuItems" value = "JELLY,INTENSIVE CARE®,LIP THERAPY,MEN"/>
   <parameter name="menuSelection" value="PRODUCTS" />
   <parameter name="menuItemSelection" value="JELLY" />

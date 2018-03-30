@@ -28,9 +28,6 @@ import com.utilities.ReusableLibs;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
-import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 
 /**
@@ -86,28 +83,31 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 					.createTestNgXMLTestTag(String.format("%s", testContext.getCurrentXmlTest().getName()));
 
 		}
-		
-		int currentAttempt = 1;
-		boolean isServerStarted = false;
-		while (currentAttempt <= IConstants.APPIUM_START_MAX_ATTEMPT && isServerStarted == false) {
-			LOG.info(String.format("Thread - %d, Attempts To Start Appium Server For %d time",
-					Thread.currentThread().getId(), currentAttempt));
-			// start appium server if automation is on mobile
-			if (this.getTestParameter(testContext, ITestParamsConstants.AUTOMATION_KIT).equalsIgnoreCase("appium")) {
-				try {
-					this.appiumDriverLocalService = new AppiumServiceFactory(
-							this.getTestParameter(testContext, "appiumIPAddress"),
-							this.convertTestParamsToCapabilities(testContext)).buildAppiumDriverLocalService();
-					this.appiumDriverLocalService.start();
-					isServerStarted = true;					
-					LOG.info(
-							String.format("Appium Server Started At URL - %s", this.appiumDriverLocalService.getUrl()));
-				} catch (Exception ex) {
-					LOG.error(ex);
+		String automationKit = this.getTestParameter(testContext, ITestParamsConstants.AUTOMATION_KIT);	
+		if (automationKit.equalsIgnoreCase("appium")) {
+			int currentAttempt = 1;
+			boolean isServerStarted = false;
+			while (currentAttempt <= IConstants.APPIUM_START_MAX_ATTEMPT && isServerStarted == false) {
+				LOG.info(String.format("Thread - %d, Attempts To Start Appium Server For %d time",
+						Thread.currentThread().getId(), currentAttempt));
+				// start appium server if automation is on mobile
+				if (this.getTestParameter(testContext, ITestParamsConstants.AUTOMATION_KIT)
+						.equalsIgnoreCase("appium")) {
+					try {
+						this.appiumDriverLocalService = new AppiumServiceFactory(
+								this.getTestParameter(testContext, "appiumIPAddress"),
+								this.convertTestParamsToCapabilities(testContext)).buildAppiumDriverLocalService();
+						this.appiumDriverLocalService.start();
+						isServerStarted = true;
+						LOG.info(String.format("Appium Server Started At URL - %s",
+								this.appiumDriverLocalService.getUrl()));
+					} catch (Exception ex) {
+						LOG.error(ex);
 
+					}
 				}
+				currentAttempt++;
 			}
-			currentAttempt++;
 		}
 	}
 
@@ -165,7 +165,7 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 
 			if (automationKit.equalsIgnoreCase("selenium")) {
 				webDriver = WebDriverFactory.getWebDriver(this.getAllTestParameters(testContext));
-			} else if (automationKit.equalsIgnoreCase("appium")) {				
+			} else if (automationKit.equalsIgnoreCase("appium")) {
 				int currentAttempt = 1;
 				boolean isAppiumDriverInitSuccessful = false;
 				while (currentAttempt <= IConstants.APPIUM_START_MAX_ATTEMPT && isAppiumDriverInitSuccessful == false) {
@@ -178,10 +178,11 @@ public abstract class TestTemplateMethodLevelInit extends TestTemplate {
 						LOG.info(String.format("Thread - %d, Succeeds To Initialize Appium In %d Attempt",
 								Thread.currentThread().getId(), currentAttempt));
 					} catch (Exception ex) {
-						LOG.error(String.format("Thread - %d Encounters Exception - %s", Thread.currentThread().getId(), ex.getMessage()));
+						LOG.error(String.format("Thread - %d Encounters Exception - %s", Thread.currentThread().getId(),
+								ex.getMessage()));
 						Thread.sleep(1000);
 					}
-					currentAttempt ++;
+					currentAttempt++;
 				}
 			}
 

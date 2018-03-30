@@ -81,17 +81,17 @@ public class WebDriverFactory {
 						.getResource(String.format("%s%s%s", "drivers", File.separatorChar, ieDriverExe));
 				String iedriverPath = Paths.get(urlFilePath.toURI()).toFile().getAbsolutePath();
 				System.setProperty("webdriver.ie.driver", iedriverPath);	
-				InternetExplorerOptions ieOptions = new InternetExplorerOptions();
-				ieOptions.enableNativeEvents();
-				ieOptions.takeFullPageScreenshot();
-				ieOptions.requireWindowFocus();
-				ieOptions.introduceFlakinessByIgnoringSecurityDomains();				
-				ieOptions.enablePersistentHovering();
-				ieOptions.ignoreZoomSettings();
-				ieOptions.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
-				ieOptions.destructivelyEnsureCleanSession();
-				ieOptions.setCapability("disable-popup-blocking", true);
-				wd = new InternetExplorerDriver(ieOptions);
+				//InternetExplorerOptions ieOptions = new InternetExplorerOptions();
+				//ieOptions.enableNativeEvents();
+				//ieOptions.takeFullPageScreenshot();
+				//ieOptions.requireWindowFocus();
+				//ieOptions.introduceFlakinessByIgnoringSecurityDomains();				
+				//ieOptions.enablePersistentHovering();
+				//ieOptions.ignoreZoomSettings();
+				//ieOptions.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
+				//ieOptions.destructivelyEnsureCleanSession();
+				//ieOptions.setCapability("disable-popup-blocking", true);
+				wd = new InternetExplorerDriver();
 				LOG.info(String.format("Driver Initialized For Browser - %s", "IE"));
 				break;
 			}
