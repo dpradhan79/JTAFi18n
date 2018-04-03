@@ -21,7 +21,7 @@
   </test>
   
   <!-- Test For US Region  On Firefox -->
-  <test name="TestVaseline_US_FF">
+  <!-- <test name="TestVaseline_US_FF">
   <parameter name="browserName" value="ff" /> 
   <parameter name="localeCountry" value="us" />
   <parameter name="appURL" value="http://www.vaseline.us/" />
@@ -32,5 +32,5 @@
   <classes>
   <class name = "dweb.test.i18n.vaseline.functionaltests.TestProducts" />  
   </classes>
-  </test>
+  </test> -->
 </suite> <!-- Suite -->
