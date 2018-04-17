@@ -19,7 +19,7 @@
   </test> 
   
    <!-- Test For Spanish On Mobile Tablet Emulator -->
-  <test name="TestBreyers_en_Mobile_Android Emulator_Tablet" preserve-order="true">
+  <!-- <test name="TestBreyers_en_Mobile_Android Emulator_Tablet" preserve-order="true">
   	<parameter name="automationKit" value="appium" />    
     <parameter name="automationName" value="UiAutomator2" />
     <parameter name="platformName" value="Android" />
@@ -33,7 +33,7 @@
     <classes>
       <class name="mweb.test.i18n.breyers.functionaltests.TestBreyers"/>
     </classes>
-  </test> 
+  </test> --> 
   
    <!-- Test For English On Pysical Mobile LG Stylus 3 -->
   <!-- <test name="TestBreyers_en_Mobile_Physical_LG Stylus 3" preserve-order="true">

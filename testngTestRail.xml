@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SuiteTestRail">
+  <!--   
+	Test Case Status Codes - 
+	1 = Pass 
+	2 = Blocked 
+	3 = Untested 
+	4 = Retest 
+	5 = Fail		 
+   -->
+  <parameter name="Test-2218" value="1" />
+  <parameter name="Test-2222" value="5" />
+  <parameter name="Test-2265" value="1" />
+  <parameter name="Test-2271" value="1" />
+  <parameter name="Test-2287" value="1" />
+  <parameter name="Test-2357" value="1" />
+  <parameter name="Test-2358" value="1" />
+  <parameter name="Test-2359" value="1" />
+  <parameter name="Test-2371" value="1" />
+  <parameter name="Test-2372" value="1" />
+  <parameter name="Test-3465" value="1" />
+  <test thread-count="5" name="TestStatusUpdate">
+    <classes>
+      <class name="testrail.TestStatusUpdate"/>
+    </classes>
+  </test> <!-- TestStatusUpdate -->
+</suite> <!-- SuiteTestRail -->
