@@ -15,6 +15,16 @@ import com.github.ppadial.testrail.client.model.TRTest;
 import dweb.test.templates.TestTemplate;
 
 public class TestStatusUpdate extends TestTemplate {
+	/**
+	Test Case Status Codes - 
+	1 = Pass 
+	2 = Blocked 
+	3 = Untested 
+	4 = Retest 
+	5 = Fail
+	
+	**/
+	
 	String testRailUrl = "https://mychgstage.testrail.net";
 	String userName = "debasish.pradhan@cigniti.com";
 	String password = "!Mpr0veMent";
